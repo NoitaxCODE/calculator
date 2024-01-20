@@ -53,6 +53,10 @@
   background-color: rgb(250, 69, 69);
 }
 
+.item img{
+  width: 40%;
+}
+
 .pressButton{
   box-shadow: var(--shadow-inset-retro);
 }

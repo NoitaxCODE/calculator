@@ -1,4 +1,4 @@
-import { addNumber, resultNumber, subtractNumber, setCounter, setAccumulated, setOperation } from "./helpers/operations.js";
+import { addNumber, resultNumber, subtractNumber, setCounter, setAccumulated, setOperation, multiplyNumber, divideNumber } from "./helpers/operations.js";
 
 const numbers = document.querySelectorAll('.number');
 const items = document.querySelectorAll('.item');
@@ -8,6 +8,8 @@ const coma = document.querySelector('#coma');
 const add = document.querySelector('#add');
 const subtract = document.querySelector('#subtract');
 const result = document.querySelector('#result');
+const multiply = document.querySelector('#multiply');
+const divide = document.querySelector('#divide');
 
 document.addEventListener('keydown', ({ key })=> {
 
@@ -23,7 +25,7 @@ document.addEventListener('keydown', ({ key })=> {
     subtract.click() 
     return
   };
-  if ( key === ',' ) {
+  if ( key === '.' ) {
     coma.click() 
     return
   };
@@ -31,6 +33,17 @@ document.addEventListener('keydown', ({ key })=> {
     clear.click() 
     return
   };
+
+  if ( key === '*' ) {
+    multiply.click() 
+    return
+  };
+
+  if ( key === '/' ) {
+    divide.click() 
+    return
+  };
+
   if ( isNaN( key ) ) return;
 
   numbers.forEach(number => {
@@ -49,6 +62,7 @@ numbers.forEach(number => {
 items.forEach(item => {
   item.addEventListener('click', (e)=>{
     styleButton(e);
+    audio.play();
   })
 })
 
@@ -72,6 +86,15 @@ subtract.addEventListener('click', ()=>{
   subtractNumber();
 });
 
+multiply.addEventListener('click', ()=>{
+  multiplyNumber();
+});
+
+divide.addEventListener('click', ()=> {
+  divideNumber();
+});
+
+const audio = new Audio('../media/Sonido-PIP.m4a')
 
 const styleButton = ({ target })=> {
 
@@ -153,10 +176,12 @@ const clearDisplay = ()=>{
 
 const clearDisplayText = ()=> {
 
+  // EL COUNTER LO USO PARA LIMPIAR EL DISPLAY LUEGO QUE COMIENZO UNA OPERACION
   if ( setCounter() >= 1 ) { 
     displayText.textContent = '0';
     setCounter(0);
   }
+
 }
 
 
