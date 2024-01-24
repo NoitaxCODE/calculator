@@ -1,4 +1,4 @@
-import { addNumber, resultNumber, subtractNumber, setCounter, setAccumulated, setOperation, multiplyNumber, divideNumber } from "./helpers/operations.js";
+import { addNumber, resultNumber, subtractNumber, setCounter, setAccumulated, setOperation, multiplyNumber, divideNumber, percentNumber } from "./helpers/operations.js";
 
 const numbers = document.querySelectorAll('.number');
 const items = document.querySelectorAll('.item');
@@ -10,6 +10,7 @@ const subtract = document.querySelector('#subtract');
 const result = document.querySelector('#result');
 const multiply = document.querySelector('#multiply');
 const divide = document.querySelector('#divide');
+const percent = document.querySelector('#percent');
 
 document.addEventListener('keydown', ({ key })=> {
 
@@ -44,6 +45,11 @@ document.addEventListener('keydown', ({ key })=> {
     return
   };
 
+  if ( key === '%' ) {
+    percent.click() 
+    return
+  };
+
   if ( isNaN( key ) ) return;
 
   numbers.forEach(number => {
@@ -62,7 +68,7 @@ numbers.forEach(number => {
 items.forEach(item => {
   item.addEventListener('click', (e)=>{
     styleButton(e);
-    audio.play();
+    // audio.play();
   })
 })
 
@@ -94,6 +100,10 @@ divide.addEventListener('click', ()=> {
   divideNumber();
 });
 
+percent.addEventListener('click', ()=> {
+  percentNumber();
+});
+
 const audio = new Audio('../media/Sonido-PIP.m4a')
 
 const styleButton = ({ target })=> {
@@ -112,7 +122,7 @@ const styleButton = ({ target })=> {
 
 };
 
-const formatNumber = ( displayText, content )=> {
+const formatDisplayNumber = ( displayText, content )=> {
 
   // PASO EL STRING A ARRAY
   const displayTextArray = displayText.split('');
@@ -160,7 +170,7 @@ const addComa = ()=> {
 const showDisplay = ( e )=>{
 
   const content = e.target.innerText
-  displayText.textContent = `${ formatNumber( displayText.textContent, content ) }`
+  displayText.textContent = formatDisplayNumber( displayText.textContent, content ) 
 
 }
 

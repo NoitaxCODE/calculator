@@ -24,7 +24,7 @@
 }
 
 #calculator::before{
-  content: 'RETRO CALCULATOR';
+  content: 'CALCULATOR';
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -76,6 +76,7 @@
   overflow: hidden;
   padding: 0 24px;
   max-width: 290px;
+  box-shadow: var(--shadow-inset-retro);
 }
 
 #display2{
