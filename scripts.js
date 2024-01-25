@@ -11,6 +11,8 @@ const result = document.querySelector('#result');
 const multiply = document.querySelector('#multiply');
 const divide = document.querySelector('#divide');
 const percent = document.querySelector('#percent');
+const sound = document.querySelector('#sound');
+const audio = new Audio('../media/Sonido-PIP.m4a');
 
 document.addEventListener('keydown', ({ key })=> {
 
@@ -68,7 +70,7 @@ numbers.forEach(number => {
 items.forEach(item => {
   item.addEventListener('click', (e)=>{
     styleButton(e);
-    // audio.play();
+    audio.play();
   })
 })
 
@@ -104,7 +106,11 @@ percent.addEventListener('click', ()=> {
   percentNumber();
 });
 
-const audio = new Audio('../media/Sonido-PIP.m4a')
+sound.addEventListener('click', ()=> {
+  enableDisableAudio();
+});
+
+
 
 const styleButton = ({ target })=> {
 
@@ -194,6 +200,9 @@ const clearDisplayText = ()=> {
 
 }
 
+const enableDisableAudio = ()=>{
+  ( audio.volume === 0 ) ? audio.volume = 1 : audio.volume = 0;
+}
 
 
 

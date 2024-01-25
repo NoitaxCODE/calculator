@@ -5,13 +5,9 @@ let counter = 0;
 
 const formatNumber = ( displayTextContent )=> {
 
-  // CON ESTA FORMULA CORRIJO EL BUG DEL PUNTO EN NUMEROS ENTEROS
+  // CON ESTA FUNCION CORRIJO EL BUG DEL PUNTO EN NUMEROS ENTEROS EN ESPAÑOL
+  return parseFloat( displayTextContent.replaceAll('.','').replace(',','.') ); 
 
-  if ( displayTextContent.search(',') > 0 ) {
-    return parseFloat( displayTextContent.replaceAll('.','').replace(',','.') ); 
-  };
-
-  return parseFloat( displayTextContent.replaceAll('.','') );
 }
 
 export const setCounter = (value = counter)=> {
@@ -78,6 +74,7 @@ export const subtractNumber = ()=> {
       accumulated = formatNumber( displayText.textContent );
       counter += 1
       operation = 'subtract'
+      console.log("Entro aca!")
       return
     };
     
@@ -111,7 +108,7 @@ export const subtractNumber = ()=> {
     displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
     counter += 1;
     operation = 'subtract'
-  
+    
 }
   
 export const multiplyNumber = ()=>{
@@ -174,6 +171,7 @@ export const divideNumber = ()=>{
   counter += 1;
   operation = 'divide'
 }
+
 export const percentNumber = ()=>{
   const display2 = document.querySelector('#display2');
     
@@ -232,31 +230,32 @@ export const resultNumber = ()=> {
 
   if ( !operation ) return;
 
-  if ( operation === 'add') {
-    display2.textContent = display2.textContent + ' + ' + displayText.textContent
-    displayText.textContent = ( accumulated + formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
-  }
-
-  if ( operation === 'subtract') {
-    display2.textContent = display2.textContent + ' - ' + displayText.textContent
-    displayText.textContent = ( accumulated - formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
-  }
-
-  if ( operation === 'multiply') {
-    display2.textContent = display2.textContent + ' * ' + displayText.textContent
-    displayText.textContent = ( accumulated * formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
-  }
-  if ( operation === 'divide') {
-    display2.textContent = display2.textContent + ' / ' + displayText.textContent
-    displayText.textContent = ( accumulated / formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
-  }
-  if ( operation === 'percent') {
-    displayText.textContent = displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
+  switch ( operation ) {
+    case 'add':
+      display2.textContent = display2.textContent + ' + ' + displayText.textContent
+      displayText.textContent = ( accumulated + formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      break;
+    case 'subtract':
+      if ( display2.textContent === '- ' ) { 
+        display2.textContent = '- ' + displayText.textContent
+      }else{
+        display2.textContent = display2.textContent + ' - ' + displayText.textContent
+      }
+      displayText.textContent = ( accumulated - formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });    
+      break;
+    case 'multiply':
+      display2.textContent = display2.textContent + ' * ' + displayText.textContent
+      displayText.textContent = ( accumulated * formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      break;
+    case 'divide':
+      display2.textContent = display2.textContent + ' / ' + displayText.textContent
+      displayText.textContent = ( accumulated / formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 }); 
+      break;
+    case 'percent':
+      displayText.textContent = displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      break;
   }
 
   accumulated = formatNumber( displayText.textContent );
-
   operation = 'result'
-
-
 };
