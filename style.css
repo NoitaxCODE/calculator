@@ -106,3 +106,16 @@
   margin-bottom: 0;
 
 }
+.disableAudioButton{
+  position: relative;
+}
+.disableAudioButton::before{
+  content: '';
+  position: absolute;
+  background-color: rgb(250, 69, 69);
+  width: 80%;
+  height: 2px;
+  transform: rotate( -45deg );
+  border: 1px solid black;
+
+}
