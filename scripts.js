@@ -68,10 +68,8 @@ numbers.forEach(number => {
 });
 
 items.forEach(item => {
-  item.addEventListener('click', ()=>{
-    styleButton.bind( this, items );
-    audio.play();
-  })
+  item.addEventListener('click', styleButton.bind(this, items) );
+  item.addEventListener('click', ()=> { audio.play()  });
 });
 
 clear.addEventListener('click', ()=>{

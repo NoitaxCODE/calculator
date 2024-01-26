@@ -3,8 +3,9 @@ import { setAccumulated, setCounter, setOperation } from "./operations.js";
 const displayText = document.querySelector('#displayText');
 const display2 = document.querySelector('#display2');
 
-export const styleButton = ({ target }, items)=> {
+export const styleButton = ( items , { target } )=> {
 
+  if( !target ) return
   if ( target.tagName === 'DIV' ) {
     target.classList.toggle("pressButton");
   }else{
@@ -59,7 +60,7 @@ export const addComa = ()=> {
     return
   }
 
-  displayText.innerHTML = `<p class="displayText">${ displayText.textContent + ',' }</p>`
+  displayText.textContent =  displayText.textContent + ','
   
 
 };
