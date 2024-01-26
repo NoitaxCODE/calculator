@@ -27,7 +27,13 @@ export const setOperation = (value = operation)=> {
 
 export const addNumber = ()=> {
 
-  
+  if ( displayText.textContent === '0' && operation === 'divide' ) {
+    displayText.textContent = 'ERROR';
+    display2.textContent = '';
+    accumulated = 0;
+    operation = '';
+    return
+  }
     
   if ( operation === 'result' ) {
     displayText.textContent = '0'
@@ -48,6 +54,9 @@ export const addNumber = ()=> {
     accumulated -= formatNumber( displayText.textContent );
   }else if( operation === 'percent' ){
     displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
+  }else if( operation === 'divide' ){
+    display2.textContent = display2.textContent + ' / ' + displayText.textContent
+    accumulated /= formatNumber( displayText.textContent );
   }else{
     display2.textContent = display2.textContent + ' + ' + displayText.textContent
     accumulated += formatNumber( displayText.textContent );
@@ -60,8 +69,14 @@ export const addNumber = ()=> {
 }
   
 export const subtractNumber = ()=> {
-  
-    
+
+    if ( displayText.textContent === '0' && operation === 'divide' ) {
+      displayText.textContent = 'ERROR';
+      display2.textContent = '';
+      accumulated = 0;
+      operation = '';
+      return
+    }
 
     if ( operation === 'result' ) {
       displayText.textContent = '0'
@@ -100,6 +115,9 @@ export const subtractNumber = ()=> {
       accumulated += formatNumber( displayText.textContent );
     }else if( operation === 'percent' ){
       displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
+    }else if( operation === 'divide' ){
+      display2.textContent = display2.textContent + ' / ' + displayText.textContent
+      accumulated /= formatNumber( displayText.textContent );
     }else {
       display2.textContent = display2.textContent + ' - ' + displayText.textContent
       accumulated -= formatNumber( displayText.textContent );
@@ -112,8 +130,15 @@ export const subtractNumber = ()=> {
 }
   
 export const multiplyNumber = ()=>{
+
+  if ( displayText.textContent === '0' && operation === 'divide' ) {
+    displayText.textContent = 'ERROR';
+    display2.textContent = '';
+    accumulated = 0;
+    operation = '';
+    return
+  }
   
-    
   if ( operation === 'result' ) {
     displayText.textContent = '0'
     operation = 'multiply'
@@ -131,6 +156,9 @@ export const multiplyNumber = ()=>{
   if (operation === 'subtract') {
       display2.textContent = display2.textContent + ' - ' + displayText.textContent
       accumulated -= formatNumber( displayText.textContent );
+  }else if( operation === 'divide' ){
+    display2.textContent = display2.textContent + ' / ' + displayText.textContent
+    accumulated /= formatNumber( displayText.textContent );
   }else {
     display2.textContent = display2.textContent + ' * ' + displayText.textContent
     accumulated *= formatNumber( displayText.textContent );
@@ -157,6 +185,14 @@ export const divideNumber = ()=>{
     operation = 'divide'
     return
   };
+
+  if ( displayText.textContent === '0' ) {
+    displayText.textContent = 'ERROR';
+    display2.textContent = '';
+    accumulated = 0;
+    operation = '';
+    return
+  }
   
   if (operation === 'subtract') {
       display2.textContent = display2.textContent + ' - ' + displayText.textContent
@@ -173,7 +209,14 @@ export const divideNumber = ()=>{
 
 export const percentNumber = ()=>{
   
-    
+  if ( displayText.textContent === '0' && operation === 'divide' ) {
+    displayText.textContent = 'ERROR';
+    display2.textContent = '';
+    accumulated = 0;
+    operation = '';
+    return
+  }
+
   if ( operation === 'result' ) {
     displayText.textContent = '0'
     operation = 'percent'
@@ -225,9 +268,15 @@ export const percentNumber = ()=>{
 
 export const resultNumber = ()=> {
   
-  
-
   if ( !operation ) return;
+
+  if ( displayText.textContent === '0' && operation === 'divide' ) {
+    displayText.textContent = 'ERROR';
+    display2.textContent = '';
+    accumulated = 0;
+    operation = '';
+    return
+  }
 
   switch ( operation ) {
     case 'add':
