@@ -1,4 +1,4 @@
-const display = document.querySelector('#display');
+const display2 = document.querySelector('#display2');
 let accumulated = 0;
 let operation;
 let counter = 0;
@@ -27,7 +27,7 @@ export const setOperation = (value = operation)=> {
 
 export const addNumber = ()=> {
 
-  const display2 = document.querySelector('#display2');
+  
     
   if ( operation === 'result' ) {
     displayText.textContent = '0'
@@ -35,8 +35,8 @@ export const addNumber = ()=> {
     return
   }
 
-  if( !display2 ) { 
-    display.insertAdjacentHTML('afterbegin', `<p id="display2">${ displayText.textContent }</p>`);
+  if( ! display2.textContent ) { 
+    display2.textContent = displayText.textContent ;
     accumulated += formatNumber( displayText.textContent );
     counter += 1
     operation = 'add'
@@ -61,7 +61,7 @@ export const addNumber = ()=> {
   
 export const subtractNumber = ()=> {
   
-    const display2 = document.querySelector('#display2');
+    
 
     if ( operation === 'result' ) {
       displayText.textContent = '0'
@@ -69,8 +69,8 @@ export const subtractNumber = ()=> {
       return
     }
     
-    if( !display2 &&  displayText.textContent === '0' ) { 
-      display.insertAdjacentHTML('afterbegin', `<p id="display2">${ '- ' }</p>`);
+    if( !display2.textContent &&  displayText.textContent === '0' ) { 
+      display2.textContent = '- ';
       accumulated = formatNumber( displayText.textContent );
       counter += 1
       operation = 'subtract'
@@ -78,8 +78,8 @@ export const subtractNumber = ()=> {
       return
     };
     
-    if( !display2 ) { 
-      display.insertAdjacentHTML('afterbegin', `<p id="display2">${ displayText.textContent }</p>`);
+    if( !display2.textContent ) { 
+      display2.textContent = displayText.textContent;
       accumulated = formatNumber( displayText.textContent );
       counter += 1
       operation = 'subtract'
@@ -112,7 +112,7 @@ export const subtractNumber = ()=> {
 }
   
 export const multiplyNumber = ()=>{
-  const display2 = document.querySelector('#display2');
+  
     
   if ( operation === 'result' ) {
     displayText.textContent = '0'
@@ -120,12 +120,11 @@ export const multiplyNumber = ()=>{
     return
   }
 
-  if( !display2 ) { 
-    display.insertAdjacentHTML('afterbegin', `<p id="display2">${ displayText.textContent }</p>`);
+  if( !display2.textContent ) { 
+    display2.textContent = displayText.textContent;
     accumulated = formatNumber( displayText.textContent );
     counter += 1
     operation = 'multiply'
-    console.log(accumulated)
     return
   };
   
@@ -143,7 +142,7 @@ export const multiplyNumber = ()=>{
 }
 
 export const divideNumber = ()=>{
-  const display2 = document.querySelector('#display2');
+  
     
   if ( operation === 'result' ) {
     displayText.textContent = '0'
@@ -151,8 +150,8 @@ export const divideNumber = ()=>{
     return
   }
 
-  if( !display2 ) { 
-    display.insertAdjacentHTML('afterbegin', `<p id="display2">${ displayText.textContent }</p>`);
+  if( !display2.textContent ) { 
+    display2.textContent = displayText.textContent;
     accumulated = formatNumber( displayText.textContent );
     counter += 1
     operation = 'divide'
@@ -173,7 +172,7 @@ export const divideNumber = ()=>{
 }
 
 export const percentNumber = ()=>{
-  const display2 = document.querySelector('#display2');
+  
     
   if ( operation === 'result' ) {
     displayText.textContent = '0'
@@ -188,8 +187,8 @@ export const percentNumber = ()=>{
     return
   }
 
-  if ( !display2 ) { 
-    display.insertAdjacentHTML('afterbegin', `<p id="display2">0</p>`);
+  if ( !display2.textContent ) { 
+    display2.textContent = 0;
     accumulated = 0;
     counter += 1
     operation = 'percent'
@@ -226,7 +225,7 @@ export const percentNumber = ()=>{
 
 export const resultNumber = ()=> {
   
-  const display2 = document.querySelector('#display2');
+  
 
   if ( !operation ) return;
 

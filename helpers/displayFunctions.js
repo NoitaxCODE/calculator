@@ -1,6 +1,7 @@
 import { setAccumulated, setCounter, setOperation } from "./operations.js";
 
 const displayText = document.querySelector('#displayText');
+const display2 = document.querySelector('#display2');
 
 export const styleButton = ({ target }, items)=> {
 
@@ -72,9 +73,8 @@ export const showDisplay = ( e )=>{
 
 export const clearDisplay = ()=>{
 
-  const display2 = document.querySelector('#display2');
   displayText.textContent = '0';
-  if( display2 ) display2.remove();
+  display2.textContent = '';
   setAccumulated(0);
   setCounter(0);
   setOperation('');
