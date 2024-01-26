@@ -114,6 +114,7 @@ sound.addEventListener('click', ()=> {
   disableEffect( sound );
 });
 
+console.log("Prueba luego del merge")
 
 
 
