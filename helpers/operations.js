@@ -28,10 +28,7 @@ export const setOperation = (value = operation)=> {
 export const addNumber = ()=> {
 
   if ( displayText.textContent === '0' && operation === 'divide' ) {
-    displayText.textContent = 'ERROR';
-    display2.textContent = '';
-    accumulated = 0;
-    operation = '';
+    showError();
     return
   }
     
@@ -71,10 +68,7 @@ export const addNumber = ()=> {
 export const subtractNumber = ()=> {
 
     if ( displayText.textContent === '0' && operation === 'divide' ) {
-      displayText.textContent = 'ERROR';
-      display2.textContent = '';
-      accumulated = 0;
-      operation = '';
+      showError();
       return
     }
 
@@ -132,10 +126,7 @@ export const subtractNumber = ()=> {
 export const multiplyNumber = ()=>{
 
   if ( displayText.textContent === '0' && operation === 'divide' ) {
-    displayText.textContent = 'ERROR';
-    display2.textContent = '';
-    accumulated = 0;
-    operation = '';
+    showError();
     return
   }
   
@@ -210,10 +201,7 @@ export const divideNumber = ()=>{
 export const percentNumber = ()=>{
   
   if ( displayText.textContent === '0' && operation === 'divide' ) {
-    displayText.textContent = 'ERROR';
-    display2.textContent = '';
-    accumulated = 0;
-    operation = '';
+    showError();
     return
   }
 
@@ -271,10 +259,7 @@ export const resultNumber = ()=> {
   if ( !operation ) return;
 
   if ( displayText.textContent === '0' && operation === 'divide' ) {
-    displayText.textContent = 'ERROR';
-    display2.textContent = '';
-    accumulated = 0;
-    operation = '';
+    showError();
     return
   }
 
@@ -307,3 +292,11 @@ export const resultNumber = ()=> {
   accumulated = formatNumber( displayText.textContent );
   operation = 'result'
 };
+
+export const showError = ()=>{
+  displayText.textContent = 'ERROR';
+  display2.textContent = '';
+  display2.classList.remove('display2-bg');
+  accumulated = 0;
+  operation = '';
+}
