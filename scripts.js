@@ -1,4 +1,4 @@
-import { addComa, clearDisplay, clearDisplayText, disableEffect, enableDisableAudio, showDisplay, styleButton } from "./helpers/displayFunctions.js";
+import { addComa, clearDisplay, clearDisplayText, disableEffect, enableDisableAudio, showDisplay, showDisplay2Bg, styleButton } from "./helpers/displayFunctions.js";
 import { addNumber, resultNumber, subtractNumber, multiplyNumber, divideNumber, percentNumber } from "./helpers/operations.js";
 
 const numbers = document.querySelectorAll('.number');
@@ -74,6 +74,7 @@ items.forEach(item => {
 
 clear.addEventListener('click', ()=>{
   clearDisplay();
+
 });
 
 coma.addEventListener('click', ()=>{
@@ -82,6 +83,7 @@ coma.addEventListener('click', ()=>{
 
 add.addEventListener('click', ()=>{
   addNumber();
+  showDisplay2Bg();
 });
 
 result.addEventListener('click', ()=>{
@@ -90,14 +92,17 @@ result.addEventListener('click', ()=>{
 
 subtract.addEventListener('click', ()=>{
   subtractNumber();
+  showDisplay2Bg();
 });
 
 multiply.addEventListener('click', ()=>{
   multiplyNumber();
+  showDisplay2Bg();
 });
 
 divide.addEventListener('click', ()=> {
   divideNumber();
+  showDisplay2Bg();
 });
 
 percent.addEventListener('click', ()=> {

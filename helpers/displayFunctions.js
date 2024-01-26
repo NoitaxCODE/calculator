@@ -5,7 +5,6 @@ const display2 = document.querySelector('#display2');
 
 export const styleButton = ( items , { target } )=> {
 
-  if( !target ) return
   if ( target.tagName === 'DIV' ) {
     target.classList.toggle("pressButton");
   }else{
@@ -76,6 +75,7 @@ export const clearDisplay = ()=>{
 
   displayText.textContent = '0';
   display2.textContent = '';
+  display2.classList.remove('display2-bg');
   setAccumulated(0);
   setCounter(0);
   setOperation('');
@@ -98,3 +98,7 @@ export const enableDisableAudio = ( audio )=>{
 export const disableEffect = ( sound )=> {
   sound.classList.toggle('disableAudioButton')
 };
+
+export const showDisplay2Bg = ()=>{
+  display2.classList.add('display2-bg')
+}
