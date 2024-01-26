@@ -66,6 +66,7 @@ export const addComa = ()=> {
 
 export const showDisplay = ( e )=>{
 
+  if ( displayText.textContent.length >= 11 ) return
   const content = e.target.innerText
   displayText.textContent = formatDisplayNumber( displayText.textContent, content ) 
 
