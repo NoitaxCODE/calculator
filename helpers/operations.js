@@ -226,30 +226,31 @@ export const percentNumber = ()=>{
     return
   };
 
+  let displayValue = accumulated * formatNumber( displayText.textContent ) / 100;
+  
   switch ( operation ) {
-    case 'subtract':
-      accumulated -= accumulated * formatNumber( displayText.textContent ) / 100;
-      display2.textContent = accumulated + ' - '
-      break;
     case 'add':
-      accumulated +=  accumulated * formatNumber( displayText.textContent ) / 100;
-      display2.textContent = accumulated + ' + '
+      accumulated += displayValue;
+      displayText.textContent = displayValue;
+      display2.textContent = display2.textContent + displayValue;
+      break;
+    case 'subtract':
+      accumulated -= displayValue;
+      displayText.textContent = displayValue;
+      display2.textContent = display2.textContent + displayValue;
       break;
     case 'multiply':
       accumulated *=  formatNumber( displayText.textContent ) / 100 ;
-      display2.textContent = accumulated + ' * '
+      displayText.textContent = formatNumber( displayText.textContent ) / 100 ;
+      display2.textContent = display2.textContent + formatNumber( displayText.textContent ) / 100;
       break;
     case 'divide':
       accumulated /=  formatNumber( displayText.textContent ) / 100;
-      display2.textContent = accumulated + ' / '
+      displayText.textContent = formatNumber( displayText.textContent ) / 100 ;
+      display2.textContent = display2.textContent + formatNumber( displayText.textContent ) / 100;
       break;
-    default:
-        accumulated = 0;
-        break;
   }
-
-  display2.textContent = display2.textContent + '%'
-  displayText.textContent = formatNumber( displayText.textContent ) / 100 ;
+        
   counter += 1;
   operation = 'percent'
 };
@@ -285,7 +286,8 @@ export const resultNumber = ()=> {
       displayText.textContent = ( accumulated / formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 }); 
       break;
     case 'percent':
-      displayText.textContent = displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      display2.textContent = display2.textContent + ' =';
+      displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
       break;
   }
 
