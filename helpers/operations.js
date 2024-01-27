@@ -178,10 +178,7 @@ export const divideNumber = ()=>{
   };
 
   if ( displayText.textContent === '0' ) {
-    displayText.textContent = 'ERROR';
-    display2.textContent = '';
-    accumulated = 0;
-    operation = '';
+    showError()
     return
   }
   
