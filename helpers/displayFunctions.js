@@ -1,4 +1,4 @@
-import { setAccumulated, setCounter, setOperation } from "./operations.js";
+import { setAccumulated, setCounter, setOperation, showError } from "./operations.js";
 
 const displayText = document.querySelector('#displayText');
 const display2 = document.querySelector('#display2');
@@ -54,13 +54,12 @@ export const formatDisplayNumber = ( displayText, content )=> {
 export const addComa = ()=> {
 
   //SI HAY MAS DE UNA COMA TIRO ERROR
-  if ( displayText.textContent.indexOf(',') > -1 ) { 
-    displayText.innerHTML = `<p class="displayText">ERROR</p>` 
+  if ( parseInt( displayText.textContent.split(',').length - 1 ) >= 2 ) { 
+    showError();
     return
   }
-
+  // ( displayText.textContent === '0' ) ? displayText.textContent =  displayText.textContent + ',' : displayText.textContent = '0,'
   displayText.textContent =  displayText.textContent + ','
-  
 
 };
 

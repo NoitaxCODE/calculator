@@ -45,6 +45,7 @@ var addNumber = function addNumber() {
   }
 
   if (operation === 'result') {
+    display2.textContent = accumulated + ' + ';
     displayText.textContent = '0';
     operation = 'add';
     return;
@@ -91,6 +92,7 @@ var subtractNumber = function subtractNumber() {
   }
 
   if (operation === 'result') {
+    display2.textContent = accumulated + ' - ';
     displayText.textContent = '0';
     operation = 'subtract';
     return;
@@ -159,6 +161,7 @@ var multiplyNumber = function multiplyNumber() {
   }
 
   if (operation === 'result') {
+    display2.textContent = accumulated + ' * ';
     displayText.textContent = '0';
     operation = 'multiply';
     return;
@@ -196,6 +199,7 @@ exports.multiplyNumber = multiplyNumber;
 
 var divideNumber = function divideNumber() {
   if (operation === 'result') {
+    display2.textContent = accumulated + ' / ';
     displayText.textContent = '0';
     operation = 'divide';
     return;
@@ -307,7 +311,7 @@ var resultNumber = function resultNumber() {
 
   switch (operation) {
     case 'add':
-      display2.textContent = display2.textContent + displayText.textContent + ' =';
+      display2.textContent.includes('=') ? display2.textContent = accumulated + ' + ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
       displayText.textContent = (accumulated + formatNumber(displayText.textContent)).toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
@@ -316,6 +320,8 @@ var resultNumber = function resultNumber() {
     case 'subtract':
       if (display2.textContent === '- ') {
         display2.textContent = '- ' + displayText.textContent;
+      } else if (display2.textContent.includes('=')) {
+        display2.textContent = accumulated + ' - ' + displayText.textContent + ' =';
       } else {
         display2.textContent = display2.textContent + displayText.textContent + ' =';
       }
@@ -326,21 +332,21 @@ var resultNumber = function resultNumber() {
       break;
 
     case 'multiply':
-      display2.textContent = display2.textContent + displayText.textContent + ' =';
+      display2.textContent.includes('=') ? display2.textContent = accumulated + ' * ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
       displayText.textContent = (accumulated * formatNumber(displayText.textContent)).toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
       break;
 
     case 'divide':
-      display2.textContent = display2.textContent + displayText.textContent + ' =';
+      display2.textContent.includes('=') ? display2.textContent = accumulated + ' / ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
       displayText.textContent = (accumulated / formatNumber(displayText.textContent)).toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
       break;
 
     case 'percent':
-      display2.textContent = display2.textContent + ' =';
+      display2.textContent.includes('=') ? display2.textContent = accumulated + ' % ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + ' =';
       displayText.textContent = accumulated.toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
