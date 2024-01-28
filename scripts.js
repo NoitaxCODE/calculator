@@ -1,5 +1,5 @@
 import { addComa, clearDisplay, clearDisplayText, disableEffect, enableDisableAudio, showDisplay, showDisplay2Bg, styleButton } from "./helpers/displayFunctions.js";
-import { addNumber, resultNumber, subtractNumber, multiplyNumber, divideNumber, percentNumber } from "./helpers/operations.js";
+import { addNumber, resultNumber, subtractNumber, multiplyNumber, divideNumber, percentNumber, backButton } from "./helpers/operations.js";
 
 const numbers = document.querySelectorAll('.number');
 const items = document.querySelectorAll('.item');
@@ -13,9 +13,10 @@ const divide = document.querySelector('#divide');
 const percent = document.querySelector('#percent');
 const sound = document.querySelector('#sound');
 const audio = new Audio('../media/Sonido-PIP.m4a');
+const back = document.querySelector('#back');
 
 document.addEventListener('keydown', ({ key })=> {
-
+  
   if ( key === 'Enter' ) { 
     result.click()
     return
@@ -49,6 +50,10 @@ document.addEventListener('keydown', ({ key })=> {
 
   if ( key === '%' ) {
     percent.click() 
+    return
+  };
+  if ( key === 'Backspace' ) {
+    backButton() 
     return
   };
 
@@ -112,6 +117,10 @@ percent.addEventListener('click', ()=> {
 sound.addEventListener('click', ()=> {
   enableDisableAudio( audio );
   disableEffect( sound );
+});
+
+back.addEventListener('click', ()=>{
+  backButton();
 });
 
 

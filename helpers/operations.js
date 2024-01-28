@@ -299,3 +299,13 @@ export const showError = ()=>{
   accumulated = 0;
   operation = '';
 }
+
+export const backButton = ()=>{
+  if ( !displayText.textContent ) return
+
+  if ( displayText.textContent.length <= 2 ) { 
+    displayText.textContent = 0
+    return
+  }
+  displayText.textContent =  displayText.textContent.slice(0,-1)
+}
