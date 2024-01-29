@@ -52,14 +52,17 @@ export const formatDisplayNumber = ( displayText, content )=> {
 };
 
 export const addComa = ()=> {
-
+  
   //SI HAY MAS DE UNA COMA TIRO ERROR
-  if ( parseInt( displayText.textContent.split(',').length - 1 ) >= 2 ) { 
-    showError();
+  if ( setOperation() ) displayText.textContent = '0';
+  setCounter(0)
+  if ( parseInt( displayText.textContent.split(',').length - 1 ) >= 1 ) { 
+    displayText.textContent =  displayText.textContent;
     return
   }
   // ( displayText.textContent === '0' ) ? displayText.textContent =  displayText.textContent + ',' : displayText.textContent = '0,'
-  displayText.textContent =  displayText.textContent + ','
+  displayText.textContent =  displayText.textContent + ',';
+
 
 };
 
