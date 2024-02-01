@@ -1,7 +1,7 @@
+import { showError } from "./displayFunctions.js";
+import { setAccumulated, setCounter, setOperation } from "./status.js";
+
 const display2 = document.querySelector('#display2');
-let accumulated = 0;
-let operation;
-let counter = 0;
 
 const formatNumber = ( displayTextContent )=> {
 
@@ -10,174 +10,179 @@ const formatNumber = ( displayTextContent )=> {
 
 }
 
-export const setCounter = (value = counter)=> {
-  counter = value
-  return counter
-}
-
-export const setAccumulated = (value = accumulated)=> {
-  accumulated = value
-  return accumulated
-}
-
-export const setOperation = (value = operation)=> {
-  operation = value
-  return operation
-}
-
 export const addNumber = ()=> {
 
-  if ( displayText.textContent === '0' && operation === 'divide' ) {
+  if ( setOperation() === 'error' ) return
+
+  if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
     showError();
     return
   }
-    
-  if ( operation === 'result' ) {
-    display2.textContent = accumulated + ' + '
-    displayText.textContent = '0'
-    operation = 'add'
-    return
-  }
 
-  if( ! display2.textContent ) { 
-    display2.textContent = displayText.textContent + ' + ';
-    accumulated += formatNumber( displayText.textContent );
-    counter += 1
-    operation = 'add'
+  if( !display2.textContent && displayText.textContent === '0' ) { 
+    display2.textContent = '0 + ';
+    setCounter( setCounter() + 1 );
+    setOperation( 'add' );
     return
   };
-  
-  if (operation === 'subtract') {
-    accumulated -= formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' - '
-  }else if( operation === 'percent' ){
-    displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
-  }else if( operation === 'divide' ){
-    accumulated /= formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' / '
-  }else{
-    accumulated += formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' + '
+    
+  if( ! display2.textContent ) { 
+    display2.textContent = displayText.textContent + ' + ';
+    setAccumulated( setAccumulated() + formatNumber( displayText.textContent ));
+    setCounter( setCounter() + 1 )
+    setOperation( 'add' )
+    return
+  };
+
+  switch ( setOperation() ) {
+    case 'result' :
+      display2.textContent = setAccumulated() + ' + '
+      displayText.textContent = '0'
+      setOperation( 'add' );
+      return
+    case 'subtract' :
+      setAccumulated( setAccumulated() - formatNumber( displayText.textContent ) );
+      display2.textContent = setAccumulated() + ' - '
+      break;
+    case 'percent' :
+      displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      break;
+    case 'divide' :
+      setAccumulated( setAccumulated() / formatNumber( displayText.textContent ) );
+      display2.textContent = setAccumulated() + ' / '
+      break;
+    default:
+      setAccumulated( setAccumulated() + formatNumber( displayText.textContent ) );
+      display2.textContent = setAccumulated() + ' + '
+      break;
   }
-  
-  displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
-  counter += 1;
-  operation = 'add'
+    
+  displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
+  setCounter( setCounter() + 1 );
+  setOperation( 'add' );
   
 }
   
 export const subtractNumber = ()=> {
+    
+    if ( setOperation() === 'error' ) return
 
-    if ( displayText.textContent === '0' && operation === 'divide' ) {
+    if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
       showError();
-      return
-    }
-
-    if ( operation === 'result' ) {
-      display2.textContent = accumulated + ' - '
-      displayText.textContent = '0'
-      operation = 'subtract'
       return
     }
     
     if( !display2.textContent &&  displayText.textContent === '0' ) { 
       display2.textContent = '0 - ';
-      accumulated = formatNumber( displayText.textContent );
-      counter += 1
-      operation = 'subtract'
-      console.log("Entro aca!")
+      setCounter( setCounter() + 1 );
+      setOperation( 'subtract' );
       return
     };
     
     if( !display2.textContent ) { 
       display2.textContent = displayText.textContent + ' - ';
-      accumulated = formatNumber( displayText.textContent );
-      counter += 1
-      operation = 'subtract'
+      setAccumulated( formatNumber( displayText.textContent ) );
+      setCounter( setCounter() + 1 );
+      setOperation( 'subtract' );
       return
     };
     
     if ( display2.textContent === '0 - ') {
-      display2.textContent =  '- ' + accumulated
-      accumulated -= formatNumber( displayText.textContent );
-      displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
-      counter += 1
-      operation = 'subtract'
+      display2.textContent =  '- ' + setAccumulated()
+      setAccumulated( setAccumulated() - formatNumber( displayText.textContent ) );
+      displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      setCounter( setCounter() + 1 );
+      setOperation( 'subtract' );
       return
     }
-    
-    if (operation === 'add') {
-      accumulated += formatNumber( displayText.textContent );
-      display2.textContent = accumulated + ' + '
-    }else if( operation === 'percent' ){
-      displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
-    }else if( operation === 'divide' ){
-      accumulated /= formatNumber( displayText.textContent );
-      display2.textContent = accumulated + ' / '
-    }else {
-      accumulated -= formatNumber( displayText.textContent );
-      display2.textContent = accumulated + ' - '
+
+    switch ( setOperation() ) {
+      case 'result':
+        display2.textContent = setAccumulated() + ' - '
+        displayText.textContent = '0'
+        setOperation( 'subtract' )
+        return
+      case 'add':
+        setAccumulated( setAccumulated() + formatNumber( displayText.textContent ) );
+        display2.textContent = setAccumulated() + ' + '
+        break;
+      case 'percent':
+        displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
+        break;
+      case 'divide':
+        setAccumulated( setAccumulated() / formatNumber( displayText.textContent ) );
+        display2.textContent = setAccumulated() + ' / '
+        break;
+      default:
+        setAccumulated( setAccumulated() - formatNumber( displayText.textContent ) );
+        display2.textContent = setAccumulated() + ' - '
+        break;
     }
-    
-    displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
-    counter += 1;
-    operation = 'subtract'
+        
+    displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
+    setCounter( setCounter() + 1 );
+    setOperation( 'subtract' )
     
 }
   
 export const multiplyNumber = ()=>{
 
-  if ( displayText.textContent === '0' && operation === 'divide' ) {
+  if ( setOperation() === 'error' ) return
+
+  if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
     showError();
     return
   }
-  
-  if ( operation === 'result' ) {
-    display2.textContent = accumulated + ' * '
-    displayText.textContent = '0'
-    operation = 'multiply'
-    return
-  }
 
-  if( !display2.textContent ) { 
-    accumulated = formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' * ';
-    counter += 1
-    operation = 'multiply'
+  if( !display2.textContent &&  displayText.textContent === '0' ) { 
+    display2.textContent = '0 * ';
+    setCounter( setCounter() + 1 );
+    setOperation( 'multiply' );
     return
   };
   
-  if (operation === 'subtract') {
-    accumulated -= formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' - '
-  }else if( operation === 'divide' ){
-    accumulated /= formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' / '
-  }else {
-    accumulated *= formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' * '
+  if( !display2.textContent ) { 
+    setAccumulated( formatNumber( displayText.textContent ) );
+    display2.textContent = setAccumulated() + ' * ';
+    setCounter( setCounter() + 1 );
+    setOperation( 'multiply' )
+    return
+  };
+
+  switch ( setOperation() ) {
+    case 'result':
+      display2.textContent = setAccumulated() + ' * '
+      displayText.textContent = '0'
+      setOperation( 'multiply' )
+      return
+    case 'subtract':
+      setAccumulated( setAccumulated() - formatNumber( displayText.textContent ) );
+      display2.textContent = setAccumulated() + ' - '
+      break;
+    case 'divide':
+      setAccumulated( setAccumulated() / formatNumber( displayText.textContent ) );
+      display2.textContent = setAccumulated() + ' / '
+      break;
+    default:
+      setAccumulated( setAccumulated() * formatNumber( displayText.textContent ) );
+      display2.textContent = setAccumulated() + ' * '
+      break;
   }
-  
-  displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
-  counter += 1;
-  operation = 'multiply'
+    
+  displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
+  setCounter( setCounter() + 1 );
+  setOperation( 'multiply' );
 }
 
 export const divideNumber = ()=>{
   
-    
-  if ( operation === 'result' ) {
-    display2.textContent = accumulated + ' / '
-    displayText.textContent = '0'
-    operation = 'divide'
-    return
-  }
+  if ( setOperation() === 'error' ) return
 
   if( !display2.textContent ) { 
-    accumulated = formatNumber( displayText.textContent );
+    setAccumulated( formatNumber( displayText.textContent ) );
     display2.textContent = displayText.textContent + ' / ';
-    counter += 1
-    operation = 'divide'
+    setCounter( setCounter() + 1 )
+    setOperation( 'divide' );
     return
   };
 
@@ -186,130 +191,135 @@ export const divideNumber = ()=>{
     return
   }
   
-  if (operation === 'subtract') {
-    accumulated -= formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' - '
-  }else {
-    accumulated /= formatNumber( displayText.textContent );
-    display2.textContent = accumulated + ' / '
+  switch ( setOperation() ) {
+    case 'result':
+      display2.textContent = setAccumulated() + ' / '
+      displayText.textContent = '0'
+      setOperation( 'divide' );
+      return
+    case 'subtract':
+      setAccumulated( setAccumulated() - formatNumber( displayText.textContent ) );
+      display2.textContent = setAccumulated() + ' - '
+      break;
+    default:
+      setAccumulated( setAccumulated() / formatNumber( displayText.textContent ) );
+      display2.textContent = setAccumulated() + ' / '
+      break;
   }
   
-  displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
-  counter += 1;
-  operation = 'divide'
+  displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
+  setCounter( setCounter() + 1 );
+  setOperation( 'divide' );
 }
 
 export const percentNumber = ()=>{
+
+  if ( setOperation() === 'error' ) return
   
-  if ( displayText.textContent === '0' && operation === 'divide' ) {
+  if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
     showError();
     return
   }
 
-  if ( operation === 'result' ) {
-    displayText.textContent = '0'
-    operation = 'percent'
-    return
-  };
-
-  if ( accumulated === 0 ) {
+  if ( setAccumulated() === 0 ) {
     displayText.textContent = '0';
-    counter += 1
-    operation = 'percent'
+    setCounter( setCounter() + 1 );
+    setOperation( 'percent' );
     return
   }
 
   if ( !display2.textContent ) { 
     display2.textContent = 0;
-    accumulated = 0;
-    counter += 1
-    operation = 'percent'
+    setAccumulated( 0 );
+    setCounter( setCounter() + 1 );
+    setOperation( 'percent' );
     return
   };
 
-  let displayValue = accumulated * formatNumber( displayText.textContent ) / 100;
+  let displayValue = setAccumulated() * formatNumber( displayText.textContent ) / 100;
   
-  switch ( operation ) {
+  switch ( setOperation() ) {
+    case 'result':
+      displayText.textContent = '0'
+      setOperation( 'percent' );
+      return
     case 'add':
-      accumulated += displayValue;
+      setAccumulated( setAccumulated() + displayValue );
       displayText.textContent = displayValue;
       display2.textContent = display2.textContent + displayValue;
       break;
     case 'subtract':
-      accumulated -= displayValue;
+      setAccumulated( setAccumulated() - displayValue );
       displayText.textContent = displayValue;
       display2.textContent = display2.textContent + displayValue;
       break;
     case 'multiply':
-      accumulated *=  formatNumber( displayText.textContent ) / 100 ;
+      setAccumulated( setAccumulated() * formatNumber( displayText.textContent ) / 100 );
       displayText.textContent = formatNumber( displayText.textContent ) / 100 ;
       display2.textContent = display2.textContent + formatNumber( displayText.textContent ) / 100;
       break;
     case 'divide':
-      accumulated /=  formatNumber( displayText.textContent ) / 100;
+      setAccumulated( setAccumulated() / formatNumber( displayText.textContent ) / 100 );
       displayText.textContent = formatNumber( displayText.textContent ) / 100 ;
       display2.textContent = display2.textContent + formatNumber( displayText.textContent ) / 100;
       break;
   }
         
-  counter += 1;
-  operation = 'percent'
+  setCounter( setCounter() + 1 );
+  setOperation( 'percent' );
 };
 
 export const resultNumber = ()=> {
-  
-  if ( !operation ) return;
 
-  if ( displayText.textContent === '0' && operation === 'divide' ) {
+  if ( setOperation() === 'error' ) return
+  
+  if ( !setOperation() ) return;
+
+  if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
     showError();
     return
   }
 
-  switch ( operation ) {
+  switch ( setOperation() ) {
     case 'add':
-      ( display2.textContent.includes('=') ) ? display2.textContent = accumulated + ' + ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
-      displayText.textContent = ( accumulated + formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      ( display2.textContent.includes('=') ) ? display2.textContent = setAccumulated() + ' + ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
+      displayText.textContent = ( setAccumulated() + formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
       break;
     case 'subtract':
       if ( display2.textContent === '- ' ) { 
         display2.textContent = '- ' + displayText.textContent
       }else if( display2.textContent.includes('=') ){
-        display2.textContent = accumulated + ' - ' + displayText.textContent + ' =' 
+        display2.textContent = setAccumulated() + ' - ' + displayText.textContent + ' =' 
       }else{
         display2.textContent = display2.textContent + displayText.textContent + ' ='
       }
-      displayText.textContent = ( accumulated - formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });    
+      displayText.textContent = ( setAccumulated() - formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });    
       break;
     case 'multiply':
-      ( display2.textContent.includes('=') ) ? display2.textContent = accumulated + ' * ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
-      displayText.textContent = ( accumulated * formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      ( display2.textContent.includes('=') ) ? display2.textContent = setAccumulated() + ' * ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
+      displayText.textContent = ( setAccumulated() * formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 });
       break;
     case 'divide':
-      ( display2.textContent.includes('=') ) ? display2.textContent = accumulated + ' / ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
-      displayText.textContent = ( accumulated / formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 }); 
+      ( display2.textContent.includes('=') ) ? display2.textContent = setAccumulated() + ' / ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
+      displayText.textContent = ( setAccumulated() / formatNumber( displayText.textContent ) ).toLocaleString('es-ES', { maximumFractionDigits: 7 }); 
       break;
     case 'percent':
-      ( display2.textContent.includes('=') ) ? display2.textContent = accumulated + ' % ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + ' =';
-      displayText.textContent = accumulated.toLocaleString('es-ES', { maximumFractionDigits: 7 });
+      ( display2.textContent.includes('=') ) ? display2.textContent = setAccumulated() + ' % ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + ' =';
+      displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
       break;
   }
 
-  accumulated = formatNumber( displayText.textContent );
-  operation = 'result'
+  setAccumulated( formatNumber( displayText.textContent ) );
+  setOperation( 'result' )
 };
 
-export const showError = ()=>{
-  displayText.textContent = 'ERROR';
-  display2.textContent = '';
-  display2.classList.remove('display2-bg');
-  accumulated = 0;
-  operation = '';
-}
-
 export const backButton = ()=>{
+
+  if ( setOperation() === 'error' ) return
+
   if ( !displayText.textContent ) return
 
-  if ( displayText.textContent.length <= 2 ) { 
+  if ( displayText.textContent.length <= 1 ) { 
     displayText.textContent = 0
     return
   }

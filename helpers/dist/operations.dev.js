@@ -3,107 +3,96 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.backButton = exports.showError = exports.resultNumber = exports.percentNumber = exports.divideNumber = exports.multiplyNumber = exports.subtractNumber = exports.addNumber = exports.setOperation = exports.setAccumulated = exports.setCounter = void 0;
+exports.backButton = exports.resultNumber = exports.percentNumber = exports.divideNumber = exports.multiplyNumber = exports.subtractNumber = exports.addNumber = void 0;
+
+var _displayFunctions = require("./displayFunctions.js");
+
+var _status = require("./status.js");
+
 var display2 = document.querySelector('#display2');
-var accumulated = 0;
-var operation;
-var counter = 0;
 
 var formatNumber = function formatNumber(displayTextContent) {
   // CON ESTA FUNCION CORRIJO EL BUG DEL PUNTO EN NUMEROS ENTEROS EN ESPAÑOL
   return parseFloat(displayTextContent.replaceAll('.', '').replace(',', '.'));
 };
 
-var setCounter = function setCounter() {
-  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : counter;
-  counter = value;
-  return counter;
-};
-
-exports.setCounter = setCounter;
-
-var setAccumulated = function setAccumulated() {
-  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : accumulated;
-  accumulated = value;
-  return accumulated;
-};
-
-exports.setAccumulated = setAccumulated;
-
-var setOperation = function setOperation() {
-  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : operation;
-  operation = value;
-  return operation;
-};
-
-exports.setOperation = setOperation;
-
 var addNumber = function addNumber() {
-  if (displayText.textContent === '0' && operation === 'divide') {
-    showError();
+  if ((0, _status.setOperation)() === 'error') return;
+
+  if (displayText.textContent === '0' && (0, _status.setOperation)() === 'divide') {
+    (0, _displayFunctions.showError)();
     return;
   }
 
-  if (operation === 'result') {
-    display2.textContent = accumulated + ' + ';
-    displayText.textContent = '0';
-    operation = 'add';
-    return;
-  }
-
-  if (!display2.textContent) {
-    display2.textContent = displayText.textContent + ' + ';
-    accumulated += formatNumber(displayText.textContent);
-    counter += 1;
-    operation = 'add';
+  if (!display2.textContent && displayText.textContent === '0') {
+    display2.textContent = '0 + ';
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('add');
     return;
   }
 
   ;
 
-  if (operation === 'subtract') {
-    accumulated -= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' - ';
-  } else if (operation === 'percent') {
-    displayText.textContent = accumulated.toLocaleString('es-ES', {
-      maximumFractionDigits: 7
-    });
-  } else if (operation === 'divide') {
-    accumulated /= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' / ';
-  } else {
-    accumulated += formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' + ';
+  if (!display2.textContent) {
+    display2.textContent = displayText.textContent + ' + ';
+    (0, _status.setAccumulated)((0, _status.setAccumulated)() + formatNumber(displayText.textContent));
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('add');
+    return;
   }
 
-  displayText.textContent = accumulated.toLocaleString('es-ES', {
+  ;
+
+  switch ((0, _status.setOperation)()) {
+    case 'result':
+      display2.textContent = (0, _status.setAccumulated)() + ' + ';
+      displayText.textContent = '0';
+      (0, _status.setOperation)('add');
+      return;
+
+    case 'subtract':
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() - formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' - ';
+      break;
+
+    case 'percent':
+      displayText.textContent = (0, _status.setAccumulated)().toLocaleString('es-ES', {
+        maximumFractionDigits: 7
+      });
+      break;
+
+    case 'divide':
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() / formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' / ';
+      break;
+
+    default:
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() + formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' + ';
+      break;
+  }
+
+  displayText.textContent = (0, _status.setAccumulated)().toLocaleString('es-ES', {
     maximumFractionDigits: 7
   });
-  counter += 1;
-  operation = 'add';
+  (0, _status.setCounter)((0, _status.setCounter)() + 1);
+  (0, _status.setOperation)('add');
 };
 
 exports.addNumber = addNumber;
 
 var subtractNumber = function subtractNumber() {
-  if (displayText.textContent === '0' && operation === 'divide') {
-    showError();
-    return;
-  }
+  if ((0, _status.setOperation)() === 'error') return;
 
-  if (operation === 'result') {
-    display2.textContent = accumulated + ' - ';
-    displayText.textContent = '0';
-    operation = 'subtract';
+  if (displayText.textContent === '0' && (0, _status.setOperation)() === 'divide') {
+    (0, _displayFunctions.showError)();
     return;
   }
 
   if (!display2.textContent && displayText.textContent === '0') {
     display2.textContent = '0 - ';
-    accumulated = formatNumber(displayText.textContent);
-    counter += 1;
-    operation = 'subtract';
-    console.log("Entro aca!");
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('subtract');
     return;
   }
 
@@ -111,208 +100,243 @@ var subtractNumber = function subtractNumber() {
 
   if (!display2.textContent) {
     display2.textContent = displayText.textContent + ' - ';
-    accumulated = formatNumber(displayText.textContent);
-    counter += 1;
-    operation = 'subtract';
+    (0, _status.setAccumulated)(formatNumber(displayText.textContent));
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('subtract');
     return;
   }
 
   ;
 
   if (display2.textContent === '0 - ') {
-    display2.textContent = '- ' + accumulated;
-    accumulated -= formatNumber(displayText.textContent);
-    displayText.textContent = accumulated.toLocaleString('es-ES', {
+    display2.textContent = '- ' + (0, _status.setAccumulated)();
+    (0, _status.setAccumulated)((0, _status.setAccumulated)() - formatNumber(displayText.textContent));
+    displayText.textContent = (0, _status.setAccumulated)().toLocaleString('es-ES', {
       maximumFractionDigits: 7
     });
-    counter += 1;
-    operation = 'subtract';
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('subtract');
     return;
   }
 
-  if (operation === 'add') {
-    accumulated += formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' + ';
-  } else if (operation === 'percent') {
-    displayText.textContent = accumulated.toLocaleString('es-ES', {
-      maximumFractionDigits: 7
-    });
-  } else if (operation === 'divide') {
-    accumulated /= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' / ';
-  } else {
-    accumulated -= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' - ';
+  switch ((0, _status.setOperation)()) {
+    case 'result':
+      display2.textContent = (0, _status.setAccumulated)() + ' - ';
+      displayText.textContent = '0';
+      (0, _status.setOperation)('subtract');
+      return;
+
+    case 'add':
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() + formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' + ';
+      break;
+
+    case 'percent':
+      displayText.textContent = (0, _status.setAccumulated)().toLocaleString('es-ES', {
+        maximumFractionDigits: 7
+      });
+      break;
+
+    case 'divide':
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() / formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' / ';
+      break;
+
+    default:
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() - formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' - ';
+      break;
   }
 
-  displayText.textContent = accumulated.toLocaleString('es-ES', {
+  displayText.textContent = (0, _status.setAccumulated)().toLocaleString('es-ES', {
     maximumFractionDigits: 7
   });
-  counter += 1;
-  operation = 'subtract';
+  (0, _status.setCounter)((0, _status.setCounter)() + 1);
+  (0, _status.setOperation)('subtract');
 };
 
 exports.subtractNumber = subtractNumber;
 
 var multiplyNumber = function multiplyNumber() {
-  if (displayText.textContent === '0' && operation === 'divide') {
-    showError();
+  if ((0, _status.setOperation)() === 'error') return;
+
+  if (displayText.textContent === '0' && (0, _status.setOperation)() === 'divide') {
+    (0, _displayFunctions.showError)();
     return;
   }
 
-  if (operation === 'result') {
-    display2.textContent = accumulated + ' * ';
-    displayText.textContent = '0';
-    operation = 'multiply';
-    return;
-  }
-
-  if (!display2.textContent) {
-    accumulated = formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' * ';
-    counter += 1;
-    operation = 'multiply';
+  if (!display2.textContent && displayText.textContent === '0') {
+    display2.textContent = '0 * ';
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('multiply');
     return;
   }
 
   ;
 
-  if (operation === 'subtract') {
-    accumulated -= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' - ';
-  } else if (operation === 'divide') {
-    accumulated /= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' / ';
-  } else {
-    accumulated *= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' * ';
+  if (!display2.textContent) {
+    (0, _status.setAccumulated)(formatNumber(displayText.textContent));
+    display2.textContent = (0, _status.setAccumulated)() + ' * ';
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('multiply');
+    return;
   }
 
-  displayText.textContent = accumulated.toLocaleString('es-ES', {
+  ;
+
+  switch ((0, _status.setOperation)()) {
+    case 'result':
+      display2.textContent = (0, _status.setAccumulated)() + ' * ';
+      displayText.textContent = '0';
+      (0, _status.setOperation)('multiply');
+      return;
+
+    case 'subtract':
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() - formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' - ';
+      break;
+
+    case 'divide':
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() / formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' / ';
+      break;
+
+    default:
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() * formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' * ';
+      break;
+  }
+
+  displayText.textContent = (0, _status.setAccumulated)().toLocaleString('es-ES', {
     maximumFractionDigits: 7
   });
-  counter += 1;
-  operation = 'multiply';
+  (0, _status.setCounter)((0, _status.setCounter)() + 1);
+  (0, _status.setOperation)('multiply');
 };
 
 exports.multiplyNumber = multiplyNumber;
 
 var divideNumber = function divideNumber() {
-  if (operation === 'result') {
-    display2.textContent = accumulated + ' / ';
-    displayText.textContent = '0';
-    operation = 'divide';
-    return;
-  }
+  if ((0, _status.setOperation)() === 'error') return;
 
   if (!display2.textContent) {
-    accumulated = formatNumber(displayText.textContent);
+    (0, _status.setAccumulated)(formatNumber(displayText.textContent));
     display2.textContent = displayText.textContent + ' / ';
-    counter += 1;
-    operation = 'divide';
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('divide');
     return;
   }
 
   ;
 
   if (displayText.textContent === '0') {
-    showError();
+    (0, _displayFunctions.showError)();
     return;
   }
 
-  if (operation === 'subtract') {
-    accumulated -= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' - ';
-  } else {
-    accumulated /= formatNumber(displayText.textContent);
-    display2.textContent = accumulated + ' / ';
+  switch ((0, _status.setOperation)()) {
+    case 'result':
+      display2.textContent = (0, _status.setAccumulated)() + ' / ';
+      displayText.textContent = '0';
+      (0, _status.setOperation)('divide');
+      return;
+
+    case 'subtract':
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() - formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' - ';
+      break;
+
+    default:
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() / formatNumber(displayText.textContent));
+      display2.textContent = (0, _status.setAccumulated)() + ' / ';
+      break;
   }
 
-  displayText.textContent = accumulated.toLocaleString('es-ES', {
+  displayText.textContent = (0, _status.setAccumulated)().toLocaleString('es-ES', {
     maximumFractionDigits: 7
   });
-  counter += 1;
-  operation = 'divide';
+  (0, _status.setCounter)((0, _status.setCounter)() + 1);
+  (0, _status.setOperation)('divide');
 };
 
 exports.divideNumber = divideNumber;
 
 var percentNumber = function percentNumber() {
-  if (displayText.textContent === '0' && operation === 'divide') {
-    showError();
+  if ((0, _status.setOperation)() === 'error') return;
+
+  if (displayText.textContent === '0' && (0, _status.setOperation)() === 'divide') {
+    (0, _displayFunctions.showError)();
     return;
   }
 
-  if (operation === 'result') {
+  if ((0, _status.setAccumulated)() === 0) {
     displayText.textContent = '0';
-    operation = 'percent';
-    return;
-  }
-
-  ;
-
-  if (accumulated === 0) {
-    displayText.textContent = '0';
-    counter += 1;
-    operation = 'percent';
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('percent');
     return;
   }
 
   if (!display2.textContent) {
     display2.textContent = 0;
-    accumulated = 0;
-    counter += 1;
-    operation = 'percent';
+    (0, _status.setAccumulated)(0);
+    (0, _status.setCounter)((0, _status.setCounter)() + 1);
+    (0, _status.setOperation)('percent');
     return;
   }
 
   ;
-  var displayValue = accumulated * formatNumber(displayText.textContent) / 100;
+  var displayValue = (0, _status.setAccumulated)() * formatNumber(displayText.textContent) / 100;
 
-  switch (operation) {
+  switch ((0, _status.setOperation)()) {
+    case 'result':
+      displayText.textContent = '0';
+      (0, _status.setOperation)('percent');
+      return;
+
     case 'add':
-      accumulated += displayValue;
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() + displayValue);
       displayText.textContent = displayValue;
       display2.textContent = display2.textContent + displayValue;
       break;
 
     case 'subtract':
-      accumulated -= displayValue;
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() - displayValue);
       displayText.textContent = displayValue;
       display2.textContent = display2.textContent + displayValue;
       break;
 
     case 'multiply':
-      accumulated *= formatNumber(displayText.textContent) / 100;
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() * formatNumber(displayText.textContent) / 100);
       displayText.textContent = formatNumber(displayText.textContent) / 100;
       display2.textContent = display2.textContent + formatNumber(displayText.textContent) / 100;
       break;
 
     case 'divide':
-      accumulated /= formatNumber(displayText.textContent) / 100;
+      (0, _status.setAccumulated)((0, _status.setAccumulated)() / formatNumber(displayText.textContent) / 100);
       displayText.textContent = formatNumber(displayText.textContent) / 100;
       display2.textContent = display2.textContent + formatNumber(displayText.textContent) / 100;
       break;
   }
 
-  counter += 1;
-  operation = 'percent';
+  (0, _status.setCounter)((0, _status.setCounter)() + 1);
+  (0, _status.setOperation)('percent');
 };
 
 exports.percentNumber = percentNumber;
 
 var resultNumber = function resultNumber() {
-  if (!operation) return;
+  if ((0, _status.setOperation)() === 'error') return;
+  if (!(0, _status.setOperation)()) return;
 
-  if (displayText.textContent === '0' && operation === 'divide') {
-    showError();
+  if (displayText.textContent === '0' && (0, _status.setOperation)() === 'divide') {
+    (0, _displayFunctions.showError)();
     return;
   }
 
-  switch (operation) {
+  switch ((0, _status.setOperation)()) {
     case 'add':
-      display2.textContent.includes('=') ? display2.textContent = accumulated + ' + ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
-      displayText.textContent = (accumulated + formatNumber(displayText.textContent)).toLocaleString('es-ES', {
+      display2.textContent.includes('=') ? display2.textContent = (0, _status.setAccumulated)() + ' + ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
+      displayText.textContent = ((0, _status.setAccumulated)() + formatNumber(displayText.textContent)).toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
       break;
@@ -321,58 +345,49 @@ var resultNumber = function resultNumber() {
       if (display2.textContent === '- ') {
         display2.textContent = '- ' + displayText.textContent;
       } else if (display2.textContent.includes('=')) {
-        display2.textContent = accumulated + ' - ' + displayText.textContent + ' =';
+        display2.textContent = (0, _status.setAccumulated)() + ' - ' + displayText.textContent + ' =';
       } else {
         display2.textContent = display2.textContent + displayText.textContent + ' =';
       }
 
-      displayText.textContent = (accumulated - formatNumber(displayText.textContent)).toLocaleString('es-ES', {
+      displayText.textContent = ((0, _status.setAccumulated)() - formatNumber(displayText.textContent)).toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
       break;
 
     case 'multiply':
-      display2.textContent.includes('=') ? display2.textContent = accumulated + ' * ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
-      displayText.textContent = (accumulated * formatNumber(displayText.textContent)).toLocaleString('es-ES', {
+      display2.textContent.includes('=') ? display2.textContent = (0, _status.setAccumulated)() + ' * ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
+      displayText.textContent = ((0, _status.setAccumulated)() * formatNumber(displayText.textContent)).toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
       break;
 
     case 'divide':
-      display2.textContent.includes('=') ? display2.textContent = accumulated + ' / ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
-      displayText.textContent = (accumulated / formatNumber(displayText.textContent)).toLocaleString('es-ES', {
+      display2.textContent.includes('=') ? display2.textContent = (0, _status.setAccumulated)() + ' / ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + displayText.textContent + ' =';
+      displayText.textContent = ((0, _status.setAccumulated)() / formatNumber(displayText.textContent)).toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
       break;
 
     case 'percent':
-      display2.textContent.includes('=') ? display2.textContent = accumulated + ' % ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + ' =';
-      displayText.textContent = accumulated.toLocaleString('es-ES', {
+      display2.textContent.includes('=') ? display2.textContent = (0, _status.setAccumulated)() + ' % ' + displayText.textContent + ' =' : display2.textContent = display2.textContent + ' =';
+      displayText.textContent = (0, _status.setAccumulated)().toLocaleString('es-ES', {
         maximumFractionDigits: 7
       });
       break;
   }
 
-  accumulated = formatNumber(displayText.textContent);
-  operation = 'result';
+  (0, _status.setAccumulated)(formatNumber(displayText.textContent));
+  (0, _status.setOperation)('result');
 };
 
 exports.resultNumber = resultNumber;
 
-var showError = function showError() {
-  displayText.textContent = 'ERROR';
-  display2.textContent = '';
-  display2.classList.remove('display2-bg');
-  accumulated = 0;
-  operation = '';
-};
-
-exports.showError = showError;
-
 var backButton = function backButton() {
+  if ((0, _status.setOperation)() === 'error') return;
   if (!displayText.textContent) return;
 
-  if (displayText.textContent.length <= 2) {
+  if (displayText.textContent.length <= 1) {
     displayText.textContent = 0;
     return;
   }

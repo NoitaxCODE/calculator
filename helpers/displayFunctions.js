@@ -1,4 +1,4 @@
-import { setAccumulated, setCounter, setOperation, showError } from "./operations.js";
+import { setAccumulated, setCounter, setOperation } from "./status.js";
 
 const displayText = document.querySelector('#displayText');
 const display2 = document.querySelector('#display2');
@@ -52,6 +52,8 @@ export const formatDisplayNumber = ( displayText, content )=> {
 };
 
 export const addComa = ()=> {
+
+  if ( setOperation() === 'error' ) return
   
   //SI HAY MAS DE UNA COMA TIRO ERROR
   if ( setOperation() ) displayText.textContent = '0';
@@ -67,6 +69,8 @@ export const addComa = ()=> {
 };
 
 export const showDisplay = ( e )=>{
+
+  if ( setOperation() === 'error' ) return
 
   if ( displayText.textContent.length >= 11 ) return
   const content = e.target.innerText
@@ -88,6 +92,7 @@ export const clearDisplayText = ()=> {
 
   // EL COUNTER LO USO PARA LIMPIAR EL DISPLAY LUEGO QUE COMIENZO UNA OPERACION
   if ( setCounter() >= 1 ) { 
+    if ( setOperation() === 'error' ) return
     displayText.textContent = '0';
     setCounter(0);
   }
@@ -104,4 +109,12 @@ export const disableEffect = ( sound )=> {
 
 export const showDisplay2Bg = ()=>{
   display2.classList.add('display2-bg')
+}
+
+export const showError = ()=>{
+  displayText.textContent = 'ERROR';
+  display2.textContent = '';
+  display2.classList.remove('display2-bg');
+  setAccumulated(0);
+  setOperation('error');
 }
