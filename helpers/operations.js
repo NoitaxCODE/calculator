@@ -274,12 +274,12 @@ export const percentNumber = ()=>{
     case 'multiply':
       setAccumulated( setAccumulated() * formatNumber( displayText.textContent ) / 100 );
       displayText.textContent = formatNumber( displayText.textContent ) / 100 ;
-      display2.textContent = display2.textContent + formatNumber( displayText.textContent ) / 100;
+      display2.textContent = display2.textContent + formatNumber( displayText.textContent ) / 10;
       break;
     case 'divide':
-      setAccumulated( setAccumulated() / formatNumber( displayText.textContent ) / 100 );
+      setAccumulated( setAccumulated() / formatNumber( displayText.textContent ) * 100 );
       displayText.textContent = formatNumber( displayText.textContent ) / 100 ;
-      display2.textContent = display2.textContent + formatNumber( displayText.textContent ) / 100;
+      display2.textContent = display2.textContent + formatNumber( displayText.textContent ) / 10;
       break;
   }
         

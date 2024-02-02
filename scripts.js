@@ -124,7 +124,3 @@ back.addEventListener('click', ()=>{
   backButton();
 });
 
-
-console.log("probando")
-
-

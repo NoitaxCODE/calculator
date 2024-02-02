@@ -18,4 +18,3 @@ export const setOperation = (value = operation)=> {
     return operation
 }
 
-console.log("prueba")
