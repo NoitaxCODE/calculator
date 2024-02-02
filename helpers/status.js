@@ -17,3 +17,5 @@ export const setOperation = (value = operation)=> {
     operation = value
     return operation
 }
+
+console.log("prueba")
