@@ -12,7 +12,7 @@ const multiply = document.querySelector('#multiply');
 const divide = document.querySelector('#divide');
 const percent = document.querySelector('#percent');
 const sound = document.querySelector('#sound');
-const audio = new Audio('../media/Sonido-PIP.m4a');
+const audio = new Audio('../media/Sonido-PIP.mp3');
 const back = document.querySelector('#back');
 
 document.addEventListener('keydown', ({ key })=> {
@@ -87,8 +87,8 @@ coma.addEventListener('click', ()=>{
 });
 
 add.addEventListener('click', ()=>{
-  addNumber();
   showDisplay2Bg();
+  addNumber();
 });
 
 result.addEventListener('click', ()=>{
@@ -96,18 +96,18 @@ result.addEventListener('click', ()=>{
 });
 
 subtract.addEventListener('click', ()=>{
-  subtractNumber();
   showDisplay2Bg();
+  subtractNumber();
 });
 
 multiply.addEventListener('click', ()=>{
-  multiplyNumber();
   showDisplay2Bg();
+  multiplyNumber();
 });
 
 divide.addEventListener('click', ()=> {
-  divideNumber();
   showDisplay2Bg();
+  divideNumber();
 });
 
 percent.addEventListener('click', ()=> {

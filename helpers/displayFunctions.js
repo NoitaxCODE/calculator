@@ -112,9 +112,10 @@ export const showDisplay2Bg = ()=>{
 }
 
 export const showError = ()=>{
+
+  display2.classList.remove('display2-bg');
   displayText.textContent = 'ERROR';
   display2.textContent = '';
-  display2.classList.remove('display2-bg');
   setAccumulated(0);
   setOperation('error');
 }

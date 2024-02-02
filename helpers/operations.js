@@ -13,6 +13,12 @@ const formatNumber = ( displayTextContent )=> {
 export const addNumber = ()=> {
 
   if ( setOperation() === 'error' ) return
+  
+  if ( display2.textContent === '0 - ' || display2.textContent === '0 * ' ) {
+    display2.textContent = '0 + ';
+    setOperation('add')
+    return
+  }
 
   if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
     showError();
@@ -64,39 +70,45 @@ export const addNumber = ()=> {
 }
   
 export const subtractNumber = ()=> {
-    
-    if ( setOperation() === 'error' ) return
+ 
+  if ( setOperation() === 'error' ) return
 
-    if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
+  if ( display2.textContent === '0 + ' || display2.textContent === '0 * ' ) {
+    display2.textContent = '0 - ';
+    setOperation('subtract')
+    return
+  }
+
+  if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
       showError();
       return
-    }
-    
-    if( !display2.textContent &&  displayText.textContent === '0' ) { 
+  }
+  
+  if( !display2.textContent &&  displayText.textContent === '0' ) { 
       display2.textContent = '0 - ';
       setCounter( setCounter() + 1 );
       setOperation( 'subtract' );
       return
-    };
-    
-    if( !display2.textContent ) { 
+  };
+  
+  if( !display2.textContent ) { 
       display2.textContent = displayText.textContent + ' - ';
       setAccumulated( formatNumber( displayText.textContent ) );
       setCounter( setCounter() + 1 );
       setOperation( 'subtract' );
       return
-    };
-    
-    if ( display2.textContent === '0 - ') {
+  };
+  
+  if ( display2.textContent === '0 - ') {
+      console.log("entro")
       display2.textContent =  '- ' + setAccumulated()
       setAccumulated( setAccumulated() - formatNumber( displayText.textContent ) );
       displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
       setCounter( setCounter() + 1 );
       setOperation( 'subtract' );
       return
-    }
-
-    switch ( setOperation() ) {
+  }
+  switch ( setOperation() ) {
       case 'result':
         display2.textContent = setAccumulated() + ' - '
         displayText.textContent = '0'
@@ -117,17 +129,23 @@ export const subtractNumber = ()=> {
         setAccumulated( setAccumulated() - formatNumber( displayText.textContent ) );
         display2.textContent = setAccumulated() + ' - '
         break;
-    }
-        
-    displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
-    setCounter( setCounter() + 1 );
-    setOperation( 'subtract' )
+  }
+      
+  displayText.textContent = setAccumulated().toLocaleString('es-ES', { maximumFractionDigits: 7 });
+  setCounter( setCounter() + 1 );
+  setOperation( 'subtract' )
     
 }
   
 export const multiplyNumber = ()=>{
 
   if ( setOperation() === 'error' ) return
+  
+  if ( display2.textContent === '0 + ' || display2.textContent === '0 - ' ) {
+    display2.textContent = '0 * ';
+    setOperation('multiply')
+    return
+  } 
 
   if ( displayText.textContent === '0' && setOperation() === 'divide' ) {
     showError();
@@ -175,9 +193,9 @@ export const multiplyNumber = ()=>{
 }
 
 export const divideNumber = ()=>{
-  
-  if ( setOperation() === 'error' ) return
 
+  if ( setOperation() === 'error' ) return
+  
   if( !display2.textContent ) { 
     setAccumulated( formatNumber( displayText.textContent ) );
     display2.textContent = displayText.textContent + ' / ';
