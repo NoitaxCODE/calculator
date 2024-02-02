@@ -1,4 +1,5 @@
 import { addComa, clearDisplay, clearDisplayText, disableEffect, enableDisableAudio, showDisplay, showDisplay2Bg, styleButton } from "./helpers/displayFunctions.js";
+import { getAudioUrl } from "./helpers/getAudio.js";
 import { addNumber, resultNumber, subtractNumber, multiplyNumber, divideNumber, percentNumber, backButton } from "./helpers/operations.js";
 
 const numbers = document.querySelectorAll('.number');
@@ -12,8 +13,8 @@ const multiply = document.querySelector('#multiply');
 const divide = document.querySelector('#divide');
 const percent = document.querySelector('#percent');
 const sound = document.querySelector('#sound');
-const audio = new Audio('../media/Sonido-PIP.mp3');
 const back = document.querySelector('#back');
+const audio = new Audio( await getAudioUrl() );
 
 document.addEventListener('keydown', ({ key })=> {
   
