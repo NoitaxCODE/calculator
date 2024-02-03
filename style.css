@@ -25,6 +25,7 @@ body {
     "ONE TWO THREE ADD"
     "COMA ZERO SOUND RESULT";
   height: 100vh;
+  min-height: 620px;
   min-width: 390px;
   padding: 1.5rem 2px;
   place-items: center;
