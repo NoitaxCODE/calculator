@@ -1,41 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculator</title>
-  <link rel="stylesheet" href="./style.css">
-  <script type="module" src="./scripts.js" defer ></script>
-  <link rel="icon" type="image/png" sizes="16x16"  href="./media/favicon-16x16.png">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="theme-color" content="#ffffff">
-</head>
-<body>
-  <div id="calculator">
-    <div id="display">
-      <p id="display2"></p>
-      <p id="displayText">0</p>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="MobileOptimized" content="width" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" href="./media/calculadora.png" />
+    <link rel="apple-touch-startup-image" href="./media/calculadora.png" />
+    <link rel="manifest" href="./manifest.json" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./media/favicon-16x16.png"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./scripts.js" defer></script>
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div id="calculator">
+      <div id="display">
+        <p id="display2"></p>
+        <p id="displayText">0</p>
+      </div>
+      <div id="clear" class="item"><p>C</p></div>
+      <div id="back" class="item"><p><</p></div>
+      <div id="percent" class="item"><p>%</p></div>
+      <div id="divide" class="item"><p>/</p></div>
+      <div class="item number"><p>7</p></div>
+      <div class="item number"><p>8</p></div>
+      <div class="item number"><p>9</p></div>
+      <div id="multiply" class="item"><p>X</p></div>
+      <div class="item number"><p>4</p></div>
+      <div class="item number"><p>5</p></div>
+      <div class="item number"><p>6</p></div>
+      <div id="subtract" class="item"><p>-</p></div>
+      <div class="item number"><p>1</p></div>
+      <div class="item number"><p>2</p></div>
+      <div class="item number"><p>3</p></div>
+      <div id="add" class="item"><p>+</p></div>
+      <div id="coma" class="item"><p>,</p></div>
+      <div class="item number"><p>0</p></div>
+      <div id="sound" class="item"><img src="./media/sound.svg" /></div>
+      <div id="result" class="item"><p>=</p></div>
     </div>
-    <div id="clear" class="item"><p>C</p></div>
-    <div id="back" class="item" ><p><</p></div>
-    <div id="percent" class="item"><p>%</p></div>
-    <div id="divide" class="item"><p>/</p></div>
-    <div class="item number"><p>7</p></div>
-    <div class="item number"><p>8</p></div>
-    <div class="item number"><p>9</p></div>
-    <div id="multiply" class="item"><p>X</p></div>
-    <div class="item number"><p>4</p></div>
-    <div class="item number"><p>5</p></div>
-    <div class="item number"><p>6</p></div>
-    <div id="subtract" class="item"><p>-</p></div>
-    <div class="item number"><p>1</p></div>
-    <div class="item number"><p>2</p></div>
-    <div class="item number"><p>3</p></div>
-    <div id="add" class="item"><p>+</p></div>
-    <div id="coma" class="item"><p>,</p></div>
-    <div class="item number"><p>0</p></div>
-    <div id="sound" class="item"><img src="./media/sound.svg"></div>
-    <div id="result" class="item"><p>=</p></div>
-  </div>
-</body>
+  </body>
 </html>
