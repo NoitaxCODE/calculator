@@ -3,6 +3,10 @@
   --shadow-inset-retro: inset 4px 4px 0 hsl(0deg 0% 35%);
 }
 
+body {
+  margin: 0;
+}
+
 #calculator {
   background-color: rgb(33 187 136);
   border: 4px solid rgb(0 0 0);
@@ -20,10 +24,10 @@
     "FOUR FIVE SIX SUBTRACT"
     "ONE TWO THREE ADD"
     "COMA ZERO SOUND RESULT";
-  max-width: 390px;
+  height: 100vh;
+  min-width: 390px;
   padding: 1.5rem 2px;
-  place-content: center center;
-  place-items: center center;
+  place-items: center;
   position: relative;
 }
 
@@ -69,12 +73,11 @@
   grid-area: DISPLAY;
   height: 6rem;
   justify-content: center;
-  margin-bottom: 0.5rem;
   margin-top: 2rem;
-  max-width: 290px;
+  min-width: 290px;
   overflow: hidden;
   padding: 0 24px;
-  width: 100%;
+  width: 80%;
 }
 
 #display2 {
@@ -118,6 +121,10 @@
   position: absolute;
   transform: rotate(-45deg);
   width: 80%;
+}
+
+.item:nth-child(1) {
+  background-color: red;
 }
 
 .item:nth-child(2) {
