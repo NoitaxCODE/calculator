@@ -1,124 +1,202 @@
-:root{
-  --shadow-retro: 4px 4px 0 hsl(0, 0%, 35%);
-  --shadow-inset-retro: inset 4px 4px 0 hsl(0, 0%, 35%);
+:root {
+  --shadow-retro: 4px 4px 0 hsl(0deg 0% 35%);
+  --shadow-inset-retro: inset 4px 4px 0 hsl(0deg 0% 35%);
 }
 
-#calculator{
-  position: relative;
+#calculator {
+  background-color: rgb(33 187 136);
+  border: 4px solid rgb(0 0 0);
+  border-radius: 30px;
+  box-shadow: var(--shadow-retro);
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(4, 70px);
-  gap: 1rem;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  max-width: 390px;
-  border: 4px solid rgb(0, 0, 0);
-  border-radius: 30px;
-  font-family: 'Courier New', Courier, monospace;
-  padding: 1.5rem 2px;
-  background-color: rgb(33, 187, 136);
+  font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  box-shadow: var(--shadow-retro);
+  gap: 1rem;
+  grid-template-areas:
+    "DISPLAY DISPLAY DISPLAY DISPLAY"
+    "CLEAR BACK PERCENT DIVIDE"
+    "SEVEN EIGHT NINE MULTIPLY"
+    "FOUR FIVE SIX SUBTRACT"
+    "ONE TWO THREE ADD"
+    "COMA ZERO SOUND RESULT";
+  max-width: 390px;
+  padding: 1.5rem 2px;
+  place-content: center center;
+  place-items: center center;
+  position: relative;
 }
 
-#calculator::before{
-  content: 'CALCULATOR';
+#calculator::before {
+  color: white;
+  content: "CALCULATOR";
+  font-size: 28px;
   position: absolute;
   right: 1rem;
   top: 1rem;
-  font-size: 28px;
-  color: white;
-
-  
 }
 
-.item{
-  box-sizing: border-box;
-  display: flex;
-  width: 70px;
-  height: 70px;
-  background-color: rgb(237, 237, 240);
+.item {
   align-items: center;
-  justify-content: center;
-  border-radius: 10%;
-  font-size: 2.2rem;
-  cursor: pointer;
+  background-color: rgb(237 237 240);
   border: 4px solid black;
+  border-radius: 10%;
   box-shadow: var(--shadow-retro);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  font-size: 2.2rem;
+  height: 70px;
+  justify-content: center;
+  width: 70px;
 }
 
-.item:last-child{
-  background-color: rgb(250, 69, 69);
-}
-
-.item img{
+.item img {
   width: 40%;
 }
 
-.pressButton{
+.pressButton {
   box-shadow: var(--shadow-inset-retro);
 }
 
-#display{
-  display: flex;
-  flex-direction: column;
-  align-items:  flex-start;
-  justify-content: center;
-  grid-column: 1 / 5;
-  width: 100%;
-  height: 6rem;
-  margin-top: 2rem;
-  margin-bottom: .5rem;
+#display {
+  align-items: flex-start;
   background-color: black;
   border-radius: 9px;
+  box-shadow: var(--shadow-inset-retro);
+  display: flex;
+  flex-direction: column;
+  grid-area: DISPLAY;
+  height: 6rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  max-width: 290px;
   overflow: hidden;
   padding: 0 24px;
-  max-width: 290px;
-  box-shadow: var(--shadow-inset-retro);
+  width: 100%;
 }
 
-#display2{
+#display2 {
   align-self: flex-end;
-  height: 30px;
   color: white;
   font-size: 1.5em;
-  padding: 0 4px;
+  height: 30px;
   margin-bottom: 0;
   margin-top: 0;
+  padding: 0 4px;
   text-wrap: nowrap;
 }
 
-.display2-bg{
-  background-color: hsl(0, 0%, 18%);
+.display2-bg {
+  background-color: hsl(0deg 0% 18%);
 }
 
-.number{
-  background-color: rgb(235, 197, 74);
-  
+.number {
+  background-color: rgb(235 197 74);
 }
 
-#displayText{
-  display: inline;
+#displayText {
   align-self: flex-end;
-  color: #ffffff;
+  color: #fff;
+  display: inline;
   font-size: 3rem;
   letter-spacing: -5px;
-  margin-top: 0;
   margin-bottom: 0;
-
+  margin-top: 0;
 }
-.disableAudioButton{
+
+.disableAudioButton {
   position: relative;
 }
-.disableAudioButton::before{
-  content: '';
-  position: absolute;
-  background-color: rgb(250, 69, 69);
-  width: 80%;
-  height: 2px;
-  transform: rotate( -45deg );
-  border: 1px solid black;
 
+.disableAudioButton::before {
+  background-color: rgb(250 69 69);
+  border: 1px solid black;
+  content: "";
+  height: 2px;
+  position: absolute;
+  transform: rotate(-45deg);
+  width: 80%;
+}
+
+.item:nth-child(2) {
+  grid-area: CLEAR;
+}
+
+.item:nth-child(3) {
+  grid-area: BACK;
+}
+
+.item:nth-child(4) {
+  grid-area: PERCENT;
+}
+
+.item:nth-child(5) {
+  grid-area: DIVIDE;
+}
+
+.item:nth-child(6) {
+  grid-area: SEVEN;
+}
+
+.item:nth-child(7) {
+  grid-area: EIGHT;
+}
+
+.item:nth-child(8) {
+  grid-area: NINE;
+}
+
+.item:nth-child(9) {
+  grid-area: MULTIPLY;
+}
+
+.item:nth-child(10) {
+  grid-area: FOUR;
+}
+
+.item:nth-child(11) {
+  grid-area: FIVE;
+}
+
+.item:nth-child(12) {
+  grid-area: SIX;
+}
+
+.item:nth-child(13) {
+  grid-area: SUBTRACT;
+}
+
+.item:nth-child(14) {
+  grid-area: ONE;
+}
+
+.item:nth-child(15) {
+  grid-area: TWO;
+}
+
+.item:nth-child(16) {
+  grid-area: THREE;
+}
+
+.item:nth-child(17) {
+  grid-area: ADD;
+}
+
+.item:nth-child(18) {
+  grid-area: COMA;
+}
+
+.item:nth-child(19) {
+  grid-area: ZERO;
+}
+
+.item:nth-child(20) {
+  grid-area: SOUND;
+}
+
+.item:nth-child(21) {
+  background-color: rgb(250 69 69);
+  grid-area: RESULT;
 }
