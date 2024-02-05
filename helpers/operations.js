@@ -13,8 +13,8 @@ export const addNumber = () => {
 
   if (display2.textContent === "0 - " || display2.textContent === "0 * ") {
     setOperation() === "subtract"
-      ? setAccumulated( setAccumulated() - formatNumber(displayText.textContent))
-      : setAccumulated( setAccumulated() * formatNumber(displayText.textContent));
+      ? setAccumulated(setAccumulated() - formatNumber(displayText.textContent))
+      : setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
     display2.textContent = `${setAccumulated()} + `;
     setCounter(1);
     setOperation("add");
@@ -74,12 +74,13 @@ export const addNumber = () => {
 };
 
 export const subtractNumber = () => {
+
   if (setOperation() === "error") return;
 
   if (display2.textContent === "0 + " || display2.textContent === "0 * ") {
     setOperation() === "add"
-      ? setAccumulated( setAccumulated() + formatNumber(displayText.textContent))
-      : setAccumulated( setAccumulated() * formatNumber(displayText.textContent));
+      ? setAccumulated(setAccumulated() + formatNumber(displayText.textContent))
+      : setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
     display2.textContent = `${setAccumulated()} - `;
     setCounter(1);
     setOperation("subtract");
@@ -106,17 +107,6 @@ export const subtractNumber = () => {
     return;
   }
 
-  if (display2.textContent === "0 - ") {
-    console.log("entro");
-    display2.textContent = "- " + setAccumulated();
-    setAccumulated(setAccumulated() - formatNumber(displayText.textContent));
-    displayText.textContent = setAccumulated().toLocaleString("es-ES", {
-      maximumFractionDigits: 7,
-    });
-    setCounter(setCounter() + 1);
-    setOperation("subtract");
-    return;
-  }
   switch (setOperation()) {
     case "result":
       display2.textContent = setAccumulated() + " - ";
@@ -154,8 +144,8 @@ export const multiplyNumber = () => {
 
   if (display2.textContent === "0 + " || display2.textContent === "0 - ") {
     setOperation() === "subtract"
-      ? setAccumulated( setAccumulated() - formatNumber(displayText.textContent))
-      : setAccumulated( setAccumulated() + formatNumber(displayText.textContent));
+      ? setAccumulated(setAccumulated() - formatNumber(displayText.textContent))
+      : setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     display2.textContent = `${setAccumulated()} * `;
     setCounter(1);
     setOperation("multiply");
@@ -326,9 +316,9 @@ export const resultNumber = () => {
     case "add":
       display2.textContent.includes("=")
         ? (display2.textContent =
-            setAccumulated() + " + " + displayText.textContent + " =")
+          setAccumulated() + " + " + displayText.textContent + " =")
         : (display2.textContent =
-            display2.textContent + displayText.textContent + " =");
+          display2.textContent + displayText.textContent + " =");
       displayText.textContent = (
         setAccumulated() + formatNumber(displayText.textContent)
       ).toLocaleString("es-ES", { maximumFractionDigits: 7 });
@@ -350,9 +340,9 @@ export const resultNumber = () => {
     case "multiply":
       display2.textContent.includes("=")
         ? (display2.textContent =
-            setAccumulated() + " * " + displayText.textContent + " =")
+          setAccumulated() + " * " + displayText.textContent + " =")
         : (display2.textContent =
-            display2.textContent + displayText.textContent + " =");
+          display2.textContent + displayText.textContent + " =");
       displayText.textContent = (
         setAccumulated() * formatNumber(displayText.textContent)
       ).toLocaleString("es-ES", { maximumFractionDigits: 7 });
@@ -360,9 +350,9 @@ export const resultNumber = () => {
     case "divide":
       display2.textContent.includes("=")
         ? (display2.textContent =
-            setAccumulated() + " / " + displayText.textContent + " =")
+          setAccumulated() + " / " + displayText.textContent + " =")
         : (display2.textContent =
-            display2.textContent + displayText.textContent + " =");
+          display2.textContent + displayText.textContent + " =");
       displayText.textContent = (
         setAccumulated() / formatNumber(displayText.textContent)
       ).toLocaleString("es-ES", { maximumFractionDigits: 7 });
@@ -370,7 +360,7 @@ export const resultNumber = () => {
     case "percent":
       display2.textContent.includes("=")
         ? (display2.textContent =
-            setAccumulated() + " % " + displayText.textContent + " =")
+          setAccumulated() + " % " + displayText.textContent + " =")
         : (display2.textContent = display2.textContent + " =");
       displayText.textContent = setAccumulated().toLocaleString("es-ES", {
         maximumFractionDigits: 7,
