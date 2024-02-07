@@ -10,6 +10,12 @@
   "scope": "./",
   "lang": "es-MX",
   "id": "/?utm_source=web_app_manifest",
+  "dir": "ltr",
+  "launch_handler": {
+    "client_mode": "navigate-new"
+  },
+  "prefer_related_applications": false,
+  "categories": ["tools", "education", "entertainment", "kids"],
   "screenshots":[
     {
       "src": "./media/img/calc-screenshot-mobile.png",
