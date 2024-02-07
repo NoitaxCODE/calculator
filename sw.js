@@ -5,6 +5,25 @@ const urlsToCache = [
   "./scripts.js",
   "./media/favicon-16x16.png",
   "./media/sound.svg",
+  "./media/img/icon_16.png",
+  "./media/img/icon_32.png",
+  "./media/img/icon_64.png",
+  "./media/img/icon_96.png",
+  "./media/img/icon_128.png",
+  "./media/img/icon_192.png",
+  "./media/img/icon_256.png",
+  "./media/img/icon_384.png",
+  "./media/img/icon_512.png",
+  "./helpers/displayFunctions.js",
+  "./helpers/getAudio.js",
+  "./helpers/operations.js",
+  "./media/gif/jesus.gif",
+  "./media/gif/mouth.gif",
+  "./media/gif/reloj.gif",
+  "./media/gif/ring.gif",
+  "./media/gif/toaser.gif",
+  "./media/img/calc-screenshot.png",
+  "./media/img/calc-screenshot-mobile.png"
 ];
 
 self.addEventListener("install", (e) => {

@@ -10,6 +10,22 @@
   "scope": "./",
   "lang": "es-MX",
   "id": "/?utm_source=web_app_manifest",
+  "screenshots":[
+    {
+      "src": "./media/img/calc-screenshot-mobile.png",
+      "sizes": "369x666",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Vista de escritorio de mi aplicación"
+    },
+    {
+      "src": "./media/img/calc-screenshot.png",
+      "sizes": "751x799",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Vista de escritorio de mi aplicación"
+    }
+  ],
   "icons": [
     {
       "src": "./media/img/icon_512.png",

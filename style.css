@@ -4,7 +4,15 @@
 }
 
 body {
+  background-color: hsl(185deg 39% 62%);
+  display: grid;
+  grid-template-areas: "leftside main main main main main main main main main rightside";
+  height: 100vh;
   margin: 0;
+
+  /* place-items: start center; */
+
+  /* place-items: center; */
 }
 
 #calculator {
@@ -17,6 +25,7 @@ body {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   gap: 1rem;
+  grid-area: main;
   grid-template-areas:
     "DISPLAY DISPLAY DISPLAY DISPLAY"
     "CLEAR BACK PERCENT DIVIDE"
@@ -24,7 +33,7 @@ body {
     "FOUR FIVE SIX SUBTRACT"
     "ONE TWO THREE ADD"
     "COMA ZERO SOUND RESULT";
-  height: 100vh;
+  margin: 16px 0;
   min-height: 620px;
   min-width: 390px;
   padding: 1.5rem 2px;
@@ -207,4 +216,35 @@ body {
 .item:nth-child(21) {
   background-color: rgb(250 69 69);
   grid-area: RESULT;
+}
+
+.leftside, .rightside{  
+  align-items: center;
+  display: none;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-around;
+}
+
+
+.leftside{
+  grid-area: leftside;
+}
+
+.rightside{
+  grid-area: rightside;
+}
+
+
+
+/* @media (width > 400px) {
+  #calculator{
+    min-width: 600px;
+  }
+} */
+
+@media (width > 600px) {
+  .leftside, .rightside{
+    display: flex;
+  }
 }
