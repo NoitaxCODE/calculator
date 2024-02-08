@@ -1,4 +1,4 @@
-import { setAccumulated, setCounter, setOperation } from "./status.js";
+import { setAccumulated, setCounter, setOperation, setOperationStatus } from "./status.js";
 
 const displayText = document.querySelector('#displayText');
 const display2 = document.querySelector('#display2');
@@ -118,4 +118,12 @@ export const showError = ()=>{
   display2.textContent = '';
   setAccumulated(0);
   setOperation('error');
+}
+
+export const validateStatusOperation = ()=> {
+  if ( setOperationStatus ) {
+    return true;
+  } else {
+    return false;
+  }
 }

@@ -1,5 +1,5 @@
 import { showError } from "./displayFunctions.js";
-import { setAccumulated, setCounter, setOperation } from "./status.js";
+import { setAccumulated, setCounter, setOperation, setOperationStatus } from "./status.js";
 
 const display2 = document.querySelector("#display2");
 
@@ -11,7 +11,7 @@ const formatNumber = (displayTextContent) => {
 export const addNumber = () => {
 
   if (setOperation() === "error") return;
-
+  
   if (display2.textContent === "0 - " || display2.textContent === "0 * ") {
     setOperation() === "subtract"
       ? setAccumulated(setAccumulated() - formatNumber(displayText.textContent))
@@ -42,6 +42,15 @@ export const addNumber = () => {
     return;
   }
 
+  if ( setOperation() !== "add"  && setOperationStatus() ){
+    displayText.textContent = 0
+    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
+    setCounter(1);
+    setOperation("add");
+    display2.textContent = setAccumulated() + " + ";
+    return;
+  }
+
   switch (setOperation()) {
     case "result":
       display2.textContent = setAccumulated() + " + ";
@@ -58,6 +67,7 @@ export const addNumber = () => {
       setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
       break;
     default:
+      
       setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
       break;
   }
@@ -103,6 +113,16 @@ export const subtractNumber = () => {
     return;
   }
 
+  if ( setOperation() !== "subtract"  && setOperationStatus() ){
+    displayText.textContent = 0
+    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
+    setCounter(1);
+    setOperation("subtract");
+    display2.textContent = setAccumulated() + " - ";
+    return;
+  }
+
+
   switch (setOperation()) {
     case "result":
       display2.textContent = setAccumulated() + " - ";
@@ -132,6 +152,7 @@ export const subtractNumber = () => {
 };
 
 export const multiplyNumber = () => {
+
   if (setOperation() === "error") return;
 
   if (display2.textContent === "0 + " || display2.textContent === "0 - ") {
@@ -162,6 +183,15 @@ export const multiplyNumber = () => {
     display2.textContent = setAccumulated() + " * ";
     setCounter(1);
     setOperation("multiply");
+    return;
+  }
+
+  if ( setOperation() !== "multiply"  && setOperationStatus() ){
+    displayText.textContent = 0
+    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
+    setCounter(1);
+    setOperation("multiply");
+    display2.textContent = setAccumulated() + " * ";
     return;
   }
 
@@ -209,6 +239,15 @@ export const divideNumber = () => {
     return;
   }
 
+  if ( setOperation() !== "divide"  && setOperationStatus() ){
+    displayText.textContent = 0
+    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
+    setCounter(1);
+    setOperation("divide");
+    display2.textContent = setAccumulated() + " / ";
+    return;
+  }
+
   switch (setOperation()) {
     case "result":
       display2.textContent = setAccumulated() + " / ";
@@ -217,7 +256,12 @@ export const divideNumber = () => {
       return;
     case "subtract":
       setAccumulated(setAccumulated() - formatNumber(displayText.textContent));
-      display2.textContent = setAccumulated() + " - ";
+      break;
+    case "add":
+      setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
+      break;
+    case "multiply":
+      setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
       break;
     default:
       setAccumulated(setAccumulated() / formatNumber(displayText.textContent));

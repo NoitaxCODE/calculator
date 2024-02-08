@@ -18,6 +18,7 @@ import {
   percentNumber,
   backButton,
 } from "./helpers/operations.js";
+import { setOperationStatus } from "./helpers/status.js";
 
 const numbers = document.querySelectorAll(".number");
 const items = document.querySelectorAll(".item");
@@ -83,6 +84,7 @@ document.addEventListener("keydown", ({ key }) => {
 
 numbers.forEach((number) => {
   number.addEventListener("click", (e) => {
+    setOperationStatus(false);
     clearDisplayText();
     showDisplay(e);
   });
@@ -96,6 +98,7 @@ items.forEach((item) => {
 });
 
 clear.addEventListener("click", () => {
+  setOperationStatus(false);
   clearDisplay();
 });
 
@@ -104,30 +107,36 @@ coma.addEventListener("click", () => {
 });
 
 add.addEventListener("click", () => {
+  setOperationStatus(true);
   showDisplay2Bg();
   addNumber();
 });
 
 result.addEventListener("click", () => {
+  setOperationStatus(false);
   resultNumber();
 });
 
 subtract.addEventListener("click", () => {
+  setOperationStatus(true);
   showDisplay2Bg();
   subtractNumber();
 });
 
 multiply.addEventListener("click", () => {
+  setOperationStatus(true);
   showDisplay2Bg();
   multiplyNumber();
 });
 
 divide.addEventListener("click", () => {
+  setOperationStatus(true);
   showDisplay2Bg();
   divideNumber();
 });
 
 percent.addEventListener("click", () => {
+  setOperationStatus(true);
   percentNumber();
 });
 

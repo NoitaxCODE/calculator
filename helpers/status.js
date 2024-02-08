@@ -1,6 +1,7 @@
 let accumulated = 0;
 let operation;
 let counter = 0;
+let operationStatus = false;
 
 
 export const setCounter = (value = counter)=> {
@@ -16,5 +17,10 @@ export const setAccumulated = (value = accumulated)=> {
 export const setOperation = (value = operation)=> {
     operation = value
     return operation
+}
+
+export const setOperationStatus = (value = operationStatus)=> {
+    operationStatus = value
+    return operationStatus
 }
 
