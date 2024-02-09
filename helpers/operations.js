@@ -81,6 +81,8 @@ export const addNumber = () => {
 
 export const subtractNumber = () => {
 
+  console.log( setOperationStatus() )
+
   if (setOperation() === "error") return;
 
   if (display2.textContent === "0 + " || display2.textContent === "0 * ") {
@@ -113,7 +115,9 @@ export const subtractNumber = () => {
     return;
   }
 
-  if ( setOperation() !== "subtract"  && setOperationStatus() ){
+
+  if ( setOperation() !== "subtract" && setOperationStatus() ){
+    console.log("entro en add")
     displayText.textContent = 0
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
@@ -130,6 +134,7 @@ export const subtractNumber = () => {
       setOperation("subtract");
       return;
     case "add":
+
       setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
       break;
     case "divide":
@@ -139,6 +144,7 @@ export const subtractNumber = () => {
       setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
       break;
     default:
+      
       setAccumulated(setAccumulated() - formatNumber(displayText.textContent));
       break;
   }

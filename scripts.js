@@ -103,6 +103,7 @@ clear.addEventListener("click", () => {
 });
 
 coma.addEventListener("click", () => {
+  setOperationStatus(false);
   addComa();
 });
 
