@@ -71,7 +71,9 @@ export const addNumber = () => {
       setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
       break;
   }
-  display2.textContent = setAccumulated() + " + ";
+  display2.textContent = setAccumulated().toLocaleString("es-ES", {
+    maximumFractionDigits: 7,
+  }) + " + ";
   displayText.textContent = setAccumulated().toLocaleString("es-ES", {
     maximumFractionDigits: 7,
   });
