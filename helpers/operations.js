@@ -11,7 +11,7 @@ const formatNumber = (displayTextContent) => {
 export const addNumber = () => {
 
   if (setOperation() === "error") return;
-  
+
   if (display2.textContent === "0 - " || display2.textContent === "0 * ") {
     setOperation() === "subtract"
       ? setAccumulated(setAccumulated() - formatNumber(displayText.textContent))
@@ -42,7 +42,7 @@ export const addNumber = () => {
     return;
   }
 
-  if ( setOperation() !== "add"  && setOperationStatus() ){
+  if (setOperation() !== "add" && setOperationStatus()) {
     displayText.textContent = 0
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
@@ -67,7 +67,7 @@ export const addNumber = () => {
       setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
       break;
     default:
-      
+
       setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
       break;
   }
@@ -80,8 +80,6 @@ export const addNumber = () => {
 };
 
 export const subtractNumber = () => {
-
-  console.log( setOperationStatus() )
 
   if (setOperation() === "error") return;
 
@@ -115,8 +113,7 @@ export const subtractNumber = () => {
     return;
   }
 
-
-  if ( setOperation() !== "subtract" && setOperationStatus() ){
+  if (setOperation() !== "subtract" && setOperationStatus()) {
     console.log("entro en add")
     displayText.textContent = 0
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
@@ -144,7 +141,7 @@ export const subtractNumber = () => {
       setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
       break;
     default:
-      
+
       setAccumulated(setAccumulated() - formatNumber(displayText.textContent));
       break;
   }
@@ -192,7 +189,7 @@ export const multiplyNumber = () => {
     return;
   }
 
-  if ( setOperation() !== "multiply"  && setOperationStatus() ){
+  if (setOperation() !== "multiply" && setOperationStatus()) {
     displayText.textContent = 0
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
@@ -245,7 +242,7 @@ export const divideNumber = () => {
     return;
   }
 
-  if ( setOperation() !== "divide"  && setOperationStatus() ){
+  if (setOperation() !== "divide" && setOperationStatus()) {
     displayText.textContent = 0
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);

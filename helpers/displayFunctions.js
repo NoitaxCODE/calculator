@@ -1,25 +1,26 @@
-import { setAccumulated, setCounter, setOperation, setOperationStatus } from "./status.js";
+import { setAccumulated, setCounter, setOperation, setOperationStatus, setPreviusValue } from "./status.js";
 
 const displayText = document.querySelector('#displayText');
 const display2 = document.querySelector('#display2');
 
-export const styleButton = ( items , { target } )=> {
+export const styleButton = (items, { target }) => {
 
-  if ( target.tagName === 'DIV' ) {
+  if (target.tagName === 'DIV') {
     target.classList.toggle("pressButton");
-  }else{
+  } else {
     target.parentElement.classList.toggle("pressButton");
   };
 
-  setTimeout( ()=> { 
-    items.forEach( item => {
+  setTimeout(() => {
+    items.forEach(item => {
       item.classList.remove("pressButton")
     }
-  )}, 150)
+    )
+  }, 150)
 
 };
 
-export const formatDisplayNumber = ( displayText, content )=> {
+export const formatDisplayNumber = (displayText, content) => {
 
   // PASO EL STRING A ARRAY
   const displayTextArray = displayText.split('');
@@ -28,21 +29,21 @@ export const formatDisplayNumber = ( displayText, content )=> {
   let arrayClear = displayTextArray.filter((word) => word !== '.');
 
   // SI HAY COMAS LAS CAMBIO POR PUNTO PARA PODER FORMATEARLO A ESPAÑOL
-  if ( arrayClear.indexOf(',') > -1 ) arrayClear.splice(arrayClear.indexOf(','), 1, '.')
+  if (arrayClear.indexOf(',') > -1) arrayClear.splice(arrayClear.indexOf(','), 1, '.')
 
   //DETECTO SI HAY UN .0
   let decimal0 = false
-  if ( ( arrayClear.join('') + content ).indexOf('.0') > -1 ) decimal0 = true
+  if ((arrayClear.join('') + content).indexOf('.0') > -1) decimal0 = true
 
 
   // CONVIERTO EL ARRAY EN STRING, LE CONCATENO EL VALOR NUEVO, LO CONVIERTO A NUMERO Y LE DOY FORMATO DE NUMERO ESPAÑOL
   // CREO EL IF PARA RESOLVER EL PROBLEMA CON EL .0
-  
+
   let result
-  if( !decimal0 ){
-    result = ( parseFloat( arrayClear.join('') + content )).toLocaleString('es-ES', { maximumFractionDigits: 7 })
-  } else{
-    result = arrayClear.join('').replace('.',',') + content 
+  if (!decimal0) {
+    result = (parseFloat(arrayClear.join('') + content)).toLocaleString('es-ES', { maximumFractionDigits: 7 })
+  } else {
+    result = arrayClear.join('').replace('.', ',') + content
   }
 
 
@@ -51,34 +52,49 @@ export const formatDisplayNumber = ( displayText, content )=> {
 
 };
 
-export const addComa = ()=> {
+export const addComa = (e) => {
 
-  if ( setOperation() === 'error' ) return
-  
-  //SI HAY MAS DE UNA COMA TIRO ERROR
-  if ( setOperation() ) displayText.textContent = '0';
+  const previusValue = setPreviusValue(e);
+
+  if (setOperation() === 'error') return
+
+  // if (setOperation()) {
+  //   displayText.textContent = '0';
+  //   console.log("entro en el if")
+
+  // }
+  console.log(previusValue)
+  if (displayText.textContent === '0') {
+    displayText.textContent = '0,';
+  }
+
+  if (previusValue) {
+    displayText.textContent = '0';
+    console.log("entro en el if")
+  }
+
   setCounter(0)
-  if ( parseInt( displayText.textContent.split(',').length - 1 ) >= 1 ) { 
-    displayText.textContent =  displayText.textContent;
+  if (parseInt(displayText.textContent.split(',').length - 1) >= 1) {
+    console.log("entroooooooooooooo")
+    displayText.textContent = displayText.textContent;
     return
   }
-  // ( displayText.textContent === '0' ) ? displayText.textContent =  displayText.textContent + ',' : displayText.textContent = '0,'
-  displayText.textContent =  displayText.textContent + ',';
+  displayText.textContent = displayText.textContent + ',';
 
 
 };
 
-export const showDisplay = ( e )=>{
+export const showDisplay = (e) => {
 
-  if ( setOperation() === 'error' ) return
+  if (setOperation() === 'error') return
 
-  if ( displayText.textContent.length >= 11 ) return
+  if (displayText.textContent.length >= 11) return
   const content = e.target.innerText
-  displayText.textContent = formatDisplayNumber( displayText.textContent, content ) 
+  displayText.textContent = formatDisplayNumber(displayText.textContent, content)
 
 };
 
-export const clearDisplay = ()=>{
+export const clearDisplay = () => {
 
   displayText.textContent = '0';
   display2.textContent = '';
@@ -88,30 +104,30 @@ export const clearDisplay = ()=>{
   setOperation('');
 };
 
-export const clearDisplayText = ()=> {
+export const clearDisplayText = () => {
 
   // EL COUNTER LO USO PARA LIMPIAR EL DISPLAY LUEGO QUE COMIENZO UNA OPERACION
-  if ( setCounter() >= 1 ) { 
-    if ( setOperation() === 'error' ) return
+  if (setCounter() >= 1) {
+    if (setOperation() === 'error') return
     displayText.textContent = '0';
     setCounter(0);
   }
 
 };
 
-export const enableDisableAudio = ( audio )=>{
-  ( audio.volume === 0 ) ? audio.volume = 1 : audio.volume = 0;
+export const enableDisableAudio = (audio) => {
+  (audio.volume === 0) ? audio.volume = 1 : audio.volume = 0;
 };
 
-export const disableEffect = ( sound )=> {
+export const disableEffect = (sound) => {
   sound.classList.toggle('disableAudioButton')
 };
 
-export const showDisplay2Bg = ()=>{
+export const showDisplay2Bg = () => {
   display2.classList.add('display2-bg')
 }
 
-export const showError = ()=>{
+export const showError = () => {
 
   display2.classList.remove('display2-bg');
   displayText.textContent = 'ERROR';
@@ -120,8 +136,8 @@ export const showError = ()=>{
   setOperation('error');
 }
 
-export const validateStatusOperation = ()=> {
-  if ( setOperationStatus ) {
+export const validateStatusOperation = () => {
+  if (setOperationStatus) {
     return true;
   } else {
     return false;

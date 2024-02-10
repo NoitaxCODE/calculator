@@ -18,7 +18,7 @@ import {
   percentNumber,
   backButton,
 } from "./helpers/operations.js";
-import { setOperationStatus } from "./helpers/status.js";
+import { resetPreviusValue, setOperationStatus, setPreviusValue } from "./helpers/status.js";
 
 const numbers = document.querySelectorAll(".number");
 const items = document.querySelectorAll(".item");
@@ -92,6 +92,7 @@ numbers.forEach((number) => {
 
 items.forEach((item) => {
   item.addEventListener("click", styleButton.bind(this, items));
+  item.addEventListener("click", (e) => { setPreviusValue(e) });
   item.addEventListener("click", () => {
     audio.play();
   });
@@ -100,11 +101,12 @@ items.forEach((item) => {
 clear.addEventListener("click", () => {
   setOperationStatus(false);
   clearDisplay();
+  resetPreviusValue();
 });
 
-coma.addEventListener("click", () => {
+coma.addEventListener("click", (e) => {
   setOperationStatus(false);
-  addComa();
+  addComa(e);
 });
 
 add.addEventListener("click", () => {
