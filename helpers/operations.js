@@ -114,7 +114,6 @@ export const subtractNumber = () => {
   }
 
   if (setOperation() !== "subtract" && setOperationStatus()) {
-    console.log("entro en add")
     displayText.textContent = 0
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
@@ -181,7 +180,6 @@ export const multiplyNumber = () => {
   }
 
   if (!display2.textContent) {
-    console.log("entro en el multi")
     setAccumulated(formatNumber(displayText.textContent));
     display2.textContent = setAccumulated() + " * ";
     setCounter(1);

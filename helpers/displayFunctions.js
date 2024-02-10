@@ -58,24 +58,13 @@ export const addComa = (e) => {
 
   if (setOperation() === 'error') return
 
-  // if (setOperation()) {
-  //   displayText.textContent = '0';
-  //   console.log("entro en el if")
+  if (displayText.textContent === '0') displayText.textContent = '0,'
 
-  // }
-  console.log(previusValue)
-  if (displayText.textContent === '0') {
-    displayText.textContent = '0,';
-  }
-
-  if (previusValue) {
-    displayText.textContent = '0';
-    console.log("entro en el if")
-  }
+  if (previusValue) displayText.textContent = '0';
 
   setCounter(0)
-  if (parseInt(displayText.textContent.split(',').length - 1) >= 1) {
-    console.log("entroooooooooooooo")
+
+  if (displayText.textContent.includes(',')) {
     displayText.textContent = displayText.textContent;
     return
   }

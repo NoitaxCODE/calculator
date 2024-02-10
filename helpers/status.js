@@ -21,10 +21,9 @@ export const setOperation = (value = operation) => {
 }
 
 export const setOperationStatus = (value) => {
-    // if (value) operationStatus += 1;
-    // if (!value) operationStatus = 0;
-    // console.log(operationStatus)
-    // if (operationStatus === 2) return true;
+    if (value) operationStatus += 1;
+    if (value === false) operationStatus = 0;
+    if (operationStatus === 2) return true;
 }
 
 export const setPreviusValue = ({ target }) => {
