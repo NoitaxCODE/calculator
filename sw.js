@@ -1,4 +1,4 @@
-const CACHE_NAME = "v1.3_cache_calculator";
+const CACHE_NAME = "v1.4_cache_calculator";
 const urlsToCache = [
   "./",
   "./style.css",
