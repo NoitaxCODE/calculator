@@ -10,7 +10,9 @@ export const validateAdd = () => {
     setOperation() === "subtract"
       ? setAccumulated(setAccumulated() - formatNumber(displayText.textContent))
       : setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
-    display2.textContent = `${setAccumulated()} + `;
+    display2.textContent = `${setAccumulated().toLocaleString("es-ES", {
+      maximumFractionDigits: 7,
+    })} + `;
     setCounter(1);
     setOperation("add");
     return true;
@@ -41,7 +43,9 @@ export const validateAdd = () => {
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
     setOperation("add");
-    display2.textContent = setAccumulated() + " + ";
+    display2.textContent = setAccumulated().toLocaleString("es-ES", {
+      maximumFractionDigits: 7,
+    }) + " + ";
     return true;
   }
 }
@@ -54,7 +58,9 @@ export const validateSubtract = () => {
     setOperation() === "add"
       ? setAccumulated(setAccumulated() + formatNumber(displayText.textContent))
       : setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
-    display2.textContent = `${setAccumulated()} - `;
+    display2.textContent = `${setAccumulated().toLocaleString("es-ES", {
+      maximumFractionDigits: 7,
+    })} - `;
     setCounter(1);
     setOperation("subtract");
     return true;
@@ -85,7 +91,9 @@ export const validateSubtract = () => {
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
     setOperation("subtract");
-    display2.textContent = setAccumulated() + " - ";
+    display2.textContent = setAccumulated().toLocaleString("es-ES", {
+      maximumFractionDigits: 7,
+    }) + " - ";
     return true;
   }
 }
@@ -98,7 +106,9 @@ export const validateMultiply = () => {
     setOperation() === "subtract"
       ? setAccumulated(setAccumulated() - formatNumber(displayText.textContent))
       : setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
-    display2.textContent = `${setAccumulated()} * `;
+    display2.textContent = `${setAccumulated().toLocaleString("es-ES", {
+      maximumFractionDigits: 7,
+    })} * `;
     setCounter(1);
     setOperation("multiply");
     return true;
@@ -118,7 +128,9 @@ export const validateMultiply = () => {
 
   if (!display2.textContent) {
     setAccumulated(formatNumber(displayText.textContent));
-    display2.textContent = setAccumulated() + " * ";
+    display2.textContent = setAccumulated().toLocaleString("es-ES", {
+      maximumFractionDigits: 7,
+    }) + " * ";
     setCounter(1);
     setOperation("multiply");
     return true;
@@ -129,7 +141,9 @@ export const validateMultiply = () => {
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
     setOperation("multiply");
-    display2.textContent = setAccumulated() + " * ";
+    display2.textContent = setAccumulated().toLocaleString("es-ES", {
+      maximumFractionDigits: 7,
+    }) + " * ";
     return true;
   }
 }
@@ -156,7 +170,9 @@ export const validateDivide = () => {
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
     setOperation("divide");
-    display2.textContent = setAccumulated() + " / ";
+    display2.textContent = setAccumulated().toLocaleString("es-ES", {
+      maximumFractionDigits: 7,
+    }) + " / ";
     return true;
   }
 }
