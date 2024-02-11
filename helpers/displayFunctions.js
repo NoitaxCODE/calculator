@@ -132,3 +132,15 @@ export const validateStatusOperation = () => {
     return false;
   }
 }
+
+export const backButton = () => {
+  if (setOperation() === "error") return;
+
+  if (!displayText.textContent) return;
+
+  if (displayText.textContent.length <= 1) {
+    displayText.textContent = 0;
+    return;
+  }
+  displayText.textContent = displayText.textContent.slice(0, -1);
+};

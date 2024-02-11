@@ -7,6 +7,7 @@ import {
   showDisplay,
   showDisplay2Bg,
   styleButton,
+  backButton,
 } from "./helpers/displayFunctions.js";
 import { getAudioUrl } from "./helpers/getAudio.js";
 import {
@@ -16,7 +17,6 @@ import {
   multiplyNumber,
   divideNumber,
   percentNumber,
-  backButton,
 } from "./helpers/operations.js";
 import { resetPreviusValue, setOperationStatus, setPreviusValue } from "./helpers/status.js";
 

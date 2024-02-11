@@ -1,55 +1,16 @@
-import { showError } from "./displayFunctions.js";
-import { setAccumulated, setCounter, setOperation, setOperationStatus } from "./status.js";
+import { setAccumulated, setCounter, setOperation } from "./status.js";
+import { validateAdd, validateDivide, validateMultiply, validatePercent, validateResult, validateSubtract } from "./validateOperations.js";
 
 const display2 = document.querySelector("#display2");
 
-const formatNumber = (displayTextContent) => {
+export const formatNumber = (displayTextContent) => {
   // CON ESTA FUNCION CORRIJO EL BUG DEL PUNTO EN NUMEROS ENTEROS EN ESPAÑOL
   return parseFloat(displayTextContent.replaceAll(".", "").replace(",", "."));
 };
 
 export const addNumber = () => {
 
-  if (setOperation() === "error") return;
-
-  if (display2.textContent === "0 - " || display2.textContent === "0 * ") {
-    setOperation() === "subtract"
-      ? setAccumulated(setAccumulated() - formatNumber(displayText.textContent))
-      : setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
-    display2.textContent = `${setAccumulated()} + `;
-    setCounter(1);
-    setOperation("add");
-    return;
-  }
-
-  if (displayText.textContent === "0" && setOperation() === "divide") {
-    showError();
-    return;
-  }
-
-  if (!display2.textContent && displayText.textContent === "0") {
-    display2.textContent = "0 + ";
-    setCounter(1);
-    setOperation("add");
-    return;
-  }
-
-  if (!display2.textContent) {
-    display2.textContent = displayText.textContent + " + ";
-    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
-    setCounter(1);
-    setOperation("add");
-    return;
-  }
-
-  if (setOperation() !== "add" && setOperationStatus()) {
-    displayText.textContent = 0
-    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
-    setCounter(1);
-    setOperation("add");
-    display2.textContent = setAccumulated() + " + ";
-    return;
-  }
+  if (validateAdd()) return;
 
   switch (setOperation()) {
     case "result":
@@ -67,6 +28,7 @@ export const addNumber = () => {
       setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
       break;
     default:
+      console.log("entro aca")
 
       setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
       break;
@@ -83,47 +45,7 @@ export const addNumber = () => {
 
 export const subtractNumber = () => {
 
-  if (setOperation() === "error") return;
-
-  if (display2.textContent === "0 + " || display2.textContent === "0 * ") {
-    setOperation() === "add"
-      ? setAccumulated(setAccumulated() + formatNumber(displayText.textContent))
-      : setAccumulated(setAccumulated() * formatNumber(displayText.textContent));
-    display2.textContent = `${setAccumulated()} - `;
-    setCounter(1);
-    setOperation("subtract");
-    return;
-  }
-
-  if (displayText.textContent === "0" && setOperation() === "divide") {
-    showError();
-    return;
-  }
-
-  if (!display2.textContent && displayText.textContent === "0") {
-    display2.textContent = "0 - ";
-    setCounter(1);
-    setOperation("subtract");
-    return;
-  }
-
-  if (!display2.textContent) {
-    display2.textContent = displayText.textContent + " - ";
-    setAccumulated(formatNumber(displayText.textContent));
-    setCounter(1);
-    setOperation("subtract");
-    return;
-  }
-
-  if (setOperation() !== "subtract" && setOperationStatus()) {
-    displayText.textContent = 0
-    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
-    setCounter(1);
-    setOperation("subtract");
-    display2.textContent = setAccumulated() + " - ";
-    return;
-  }
-
+  if (validateSubtract()) return;
 
   switch (setOperation()) {
     case "result":
@@ -157,46 +79,7 @@ export const subtractNumber = () => {
 
 export const multiplyNumber = () => {
 
-  if (setOperation() === "error") return;
-
-  if (display2.textContent === "0 + " || display2.textContent === "0 - ") {
-    setOperation() === "subtract"
-      ? setAccumulated(setAccumulated() - formatNumber(displayText.textContent))
-      : setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
-    display2.textContent = `${setAccumulated()} * `;
-    setCounter(1);
-    setOperation("multiply");
-    return;
-  }
-
-  if (displayText.textContent === "0" && setOperation() === "divide") {
-    showError();
-    return;
-  }
-
-  if (!display2.textContent && displayText.textContent === "0") {
-    display2.textContent = "0 * ";
-    setCounter(1);
-    setOperation("multiply");
-    return;
-  }
-
-  if (!display2.textContent) {
-    setAccumulated(formatNumber(displayText.textContent));
-    display2.textContent = setAccumulated() + " * ";
-    setCounter(1);
-    setOperation("multiply");
-    return;
-  }
-
-  if (setOperation() !== "multiply" && setOperationStatus()) {
-    displayText.textContent = 0
-    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
-    setCounter(1);
-    setOperation("multiply");
-    display2.textContent = setAccumulated() + " * ";
-    return;
-  }
+  if (validateMultiply()) return;
 
   switch (setOperation()) {
     case "result":
@@ -227,29 +110,8 @@ export const multiplyNumber = () => {
 };
 
 export const divideNumber = () => {
-  if (setOperation() === "error") return;
 
-  if (!display2.textContent) {
-    setAccumulated(formatNumber(displayText.textContent));
-    display2.textContent = displayText.textContent + " / ";
-    setCounter(1);
-    setOperation("divide");
-    return;
-  }
-
-  if (displayText.textContent === "0") {
-    showError();
-    return;
-  }
-
-  if (setOperation() !== "divide" && setOperationStatus()) {
-    displayText.textContent = 0
-    setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
-    setCounter(1);
-    setOperation("divide");
-    display2.textContent = setAccumulated() + " / ";
-    return;
-  }
+  if (validateDivide()) return;
 
   switch (setOperation()) {
     case "result":
@@ -281,27 +143,8 @@ export const divideNumber = () => {
 };
 
 export const percentNumber = () => {
-  if (setOperation() === "error") return;
 
-  if (displayText.textContent === "0" && setOperation() === "divide") {
-    showError();
-    return;
-  }
-
-  if (setAccumulated() === 0) {
-    displayText.textContent = "0";
-    setCounter(1);
-    setOperation("percent");
-    return;
-  }
-
-  if (!display2.textContent) {
-    display2.textContent = 0;
-    setAccumulated(0);
-    setCounter(1);
-    setOperation("percent");
-    return;
-  }
+  if (validatePercent()) return;
 
   let displayValue =
     (setAccumulated() * formatNumber(displayText.textContent)) / 100;
@@ -344,14 +187,8 @@ export const percentNumber = () => {
 };
 
 export const resultNumber = () => {
-  if (setOperation() === "error") return;
 
-  if (!setOperation()) return;
-
-  if (displayText.textContent === "0" && setOperation() === "divide") {
-    showError();
-    return;
-  }
+  if (validateResult()) return;
 
   switch (setOperation()) {
     case "add":
@@ -413,14 +250,4 @@ export const resultNumber = () => {
   setOperation("result");
 };
 
-export const backButton = () => {
-  if (setOperation() === "error") return;
 
-  if (!displayText.textContent) return;
-
-  if (displayText.textContent.length <= 1) {
-    displayText.textContent = 0;
-    return;
-  }
-  displayText.textContent = displayText.textContent.slice(0, -1);
-};
