@@ -35,6 +35,7 @@ const back = document.querySelector("#back");
 const audio = new Audio(await getAudioUrl());
 
 document.addEventListener("keydown", ({ key }) => {
+
   if (key === "Enter") {
     result.click();
     return;
@@ -52,6 +53,11 @@ document.addEventListener("keydown", ({ key }) => {
     return;
   }
   if (key === "Delete") {
+    clear.click();
+    return;
+  }
+
+  if (key === "Escape") {
     clear.click();
     return;
   }
