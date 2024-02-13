@@ -169,3 +169,5 @@ if ("serviceWorker" in navigator) {
     }
   })();
 }
+
+console.log("actualizo")

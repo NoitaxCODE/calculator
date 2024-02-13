@@ -1,4 +1,4 @@
-const CACHE_NAME = "v1.4_cache_calculator";
+const CACHE_NAME = "v1.5_cache_calculator";
 const urlsToCache = [
   "./",
   "./style.css",
@@ -17,6 +17,7 @@ const urlsToCache = [
   "./helpers/displayFunctions.js",
   "./helpers/getAudio.js",
   "./helpers/operations.js",
+  "./helpers/validateOperations.js",
   "./media/gif/jesus.gif",
   "./media/gif/mouth.gif",
   "./media/gif/reloj.gif",

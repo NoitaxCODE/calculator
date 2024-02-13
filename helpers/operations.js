@@ -270,4 +270,5 @@ export const resultNumber = () => {
   setOperation("result");
 };
 
+console.log("actualizo")
 
