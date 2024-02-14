@@ -1,4 +1,5 @@
 const CACHE_NAME = "v1.5_cache_calculator";
+// CUIDADO DE NO ESCRIBIR BIEN A LAS RUTAS NI A LOS NOMBRES DE LOS ARCHIVOS PQ SINO NO TE CARGA EL CACHE
 const urlsToCache = [
   "./",
   "./style.css",
@@ -22,7 +23,7 @@ const urlsToCache = [
   "./media/gif/mouth.gif",
   "./media/gif/reloj.gif",
   "./media/gif/ring.gif",
-  "./media/gif/toaser.gif",
+  "./media/gif/toaster.gif",
   "./media/img/calc-screenshot.png",
   "./media/img/calc-screenshot-mobile.png"
 ];
@@ -31,7 +32,7 @@ self.addEventListener("install", (e) => {
   e.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => {
+      .then(cache => {
         return cache.addAll(urlsToCache).then(() => self.skipWaiting());
       })
       .catch((err) => console.log("Fallo registro de cache", err)),
