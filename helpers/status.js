@@ -37,5 +37,3 @@ export const setPreviusValue = ({ target }) => {
 export const resetPreviusValue = () => {
     previusValue = ''
 }
-
-console.log("actualizo")

@@ -18,5 +18,3 @@ export const getAudioUrl = async () => {
     console.log(error)
   }
 }
-
-console.log("actualizo")

@@ -211,5 +211,3 @@ export const validateResult = () => {
     return true;
   }
 }
-
-console.log("actualizo")

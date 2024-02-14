@@ -144,5 +144,3 @@ export const backButton = () => {
   }
   displayText.textContent = displayText.textContent.slice(0, -1);
 };
-
-console.log("actualizo")
