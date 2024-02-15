@@ -1,4 +1,4 @@
-const CACHE_NAME = "v2.1_cache_calculator";
+const CACHE_NAME = "v2.2_cache_calculator";
 // CUIDADO DE NO ESCRIBIR BIEN A LAS RUTAS NI A LOS NOMBRES DE LOS ARCHIVOS PQ SINO NO TE CARGA EL CACHE
 const urlsToCache = [
   "./",
@@ -15,6 +15,11 @@ const urlsToCache = [
   "./media/img/icon_256.png",
   "./media/img/icon_384.png",
   "./media/img/icon_512.png",
+  "./media/gif/jesus.gif",
+  "./media/gif/mouth.gif",
+  "./media/gif/reloj.gif",
+  "./media/gif/ring.gif",
+  "./media/gif/toaster.gif",
   "./helpers/displayFunctions.js",
   "./helpers/getAudio.js",
   "./helpers/operations.js",
