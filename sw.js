@@ -19,11 +19,11 @@ const urlsToCache = [
   "./helpers/getAudio.js",
   "./helpers/operations.js",
   "./helpers/validateOperations.js",
-  "./media/gif/jesus.gif",
-  "./media/gif/mouth.gif",
-  "./media/gif/reloj.gif",
-  "./media/gif/ring.gif",
-  "./media/gif/toaster.gif",
+  // "./media/gif/jesus.gif",
+  // "./media/gif/mouth.gif",
+  // "./media/gif/reloj.gif",
+  // "./media/gif/ring.gif",
+  // "./media/gif/toaster.gif",
   "./media/img/calc-screenshot.png",
   "./media/img/calc-screenshot-mobile.png"
 ];
@@ -47,12 +47,12 @@ self.addEventListener("activate", (e) => {
       .keys()
       .then((cacheNames) => {
         cacheNames.map((cacheName) => {
-          if (cacheWithelist.indexOf(cacheName) === -1)
-            return caches.delete(cacheName);
+          if (cacheWithelist.indexOf(cacheName) === -1) return caches.delete(cacheName);
         });
       })
-      .then(() => self.clients.claim()),
+      .then(() => self.clients.claim())
   );
+  caches.keys().then(cache => console.log(cache))
 });
 
 self.addEventListener("fetch", (e) => {
