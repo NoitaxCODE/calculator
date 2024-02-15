@@ -1,4 +1,4 @@
-const CACHE_NAME = "v2_cache_calculator";
+const CACHE_NAME = "v2.1_cache_calculator";
 // CUIDADO DE NO ESCRIBIR BIEN A LAS RUTAS NI A LOS NOMBRES DE LOS ARCHIVOS PQ SINO NO TE CARGA EL CACHE
 const urlsToCache = [
   "./",
@@ -19,11 +19,6 @@ const urlsToCache = [
   "./helpers/getAudio.js",
   "./helpers/operations.js",
   "./helpers/validateOperations.js",
-  // "./media/gif/jesus.gif",
-  // "./media/gif/mouth.gif",
-  // "./media/gif/reloj.gif",
-  // "./media/gif/ring.gif",
-  // "./media/gif/toaster.gif",
   "./media/img/calc-screenshot.png",
   "./media/img/calc-screenshot-mobile.png"
 ];
@@ -47,7 +42,11 @@ self.addEventListener("activate", (e) => {
       .keys()
       .then((cacheNames) => {
         cacheNames.map((cacheName) => {
-          if (cacheWithelist.indexOf(cacheName) === -1) return caches.delete(cacheName);
+          if (cacheWithelist.indexOf(cacheName) === -1) {
+            console.log("borro el cache viejo")
+            return caches.delete(cacheName);
+
+          }
         });
       })
       .then(() => self.clients.claim())
