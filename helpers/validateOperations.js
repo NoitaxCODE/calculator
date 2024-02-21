@@ -1,4 +1,4 @@
-import { showError } from "./displayFunctions.js";
+import { clearDisplay, showError } from "./displayFunctions.js";
 import { formatNumber } from "./operations.js";
 import { setAccumulated, setCounter, setOperation, setOperationStatus } from "./status.js";
 
@@ -205,6 +205,11 @@ export const validateResult = () => {
   if (setOperation() === "error") return true;
 
   if (!setOperation()) return true;
+
+  if (displayText.textContent === "0" && setOperation() === "multiply"){
+    clearDisplay();
+    return true;
+  }
 
   if (displayText.textContent === "0" && setOperation() === "divide") {
     showError();
