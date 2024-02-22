@@ -207,7 +207,8 @@ export const validateResult = () => {
   if (!setOperation()) return true;
 
   if (displayText.textContent === "0" && setOperation() === "multiply"){
-    clearDisplay();
+    displayText.textContent = 0;
+    display2.textContent = display2.textContent + " 0 =";
     return true;
   }
 

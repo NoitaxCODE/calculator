@@ -1,4 +1,4 @@
-const CACHE_NAME = "v2.3_cache_calculator";
+const CACHE_NAME = "v2.5_cache_calculator";
 // CUIDADO DE NO ESCRIBIR BIEN A LAS RUTAS NI A LOS NOMBRES DE LOS ARCHIVOS PQ SINO NO TE CARGA EL CACHE
 const urlsToCache = [
   "./",
@@ -48,15 +48,12 @@ self.addEventListener("activate", (e) => {
       .then((cacheNames) => {
         cacheNames.map((cacheName) => {
           if (cacheWithelist.indexOf(cacheName) === -1) {
-            console.log("borro el cache viejo")
             return caches.delete(cacheName);
-
           }
         });
       })
       .then(() => self.clients.claim())
   );
-  caches.keys().then(cache => console.log(cache))
 });
 
 self.addEventListener("fetch", (e) => {
