@@ -1,4 +1,4 @@
-import { clearDisplay, showError } from "./displayFunctions.js";
+import { showError } from "./displayFunctions.js";
 import { formatNumber } from "./operations.js";
 import { setAccumulated, setCounter, setOperation, setOperationStatus } from "./status.js";
 
@@ -35,6 +35,14 @@ export const validateAdd = () => {
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
     setCounter(1);
     setOperation("add");
+    return true;
+  }
+
+  if (displayText.textContent === "0" && setOperation() === "multiply") {
+    displayText.textContent = 0;
+    display2.textContent = display2.textContent + " 0 =";
+    setOperation("add");
+    setAccumulated(0);
     return true;
   }
 
@@ -86,6 +94,14 @@ export const validateSubtract = () => {
     return true;
   }
 
+  if (displayText.textContent === "0" && setOperation() === "multiply") {
+    displayText.textContent = 0;
+    display2.textContent = display2.textContent + " 0 =";
+    setOperation("subtract");
+    setAccumulated(0);
+    return true;
+  }
+
   if (setOperation() !== "subtract" && setOperationStatus()) {
     displayText.textContent = 0
     setAccumulated(setAccumulated() + formatNumber(displayText.textContent));
@@ -133,6 +149,14 @@ export const validateMultiply = () => {
     }) + " * ";
     setCounter(1);
     setOperation("multiply");
+    return true;
+  }
+
+  if (displayText.textContent === "0" && setOperation() === "multiply") {
+    displayText.textContent = 0;
+    display2.textContent = display2.textContent + " 0 =";
+    setOperation("multiply");
+    setAccumulated(0);
     return true;
   }
 
@@ -206,9 +230,10 @@ export const validateResult = () => {
 
   if (!setOperation()) return true;
 
-  if (displayText.textContent === "0" && setOperation() === "multiply"){
+  if (displayText.textContent === "0" && setOperation() === "multiply") {
     displayText.textContent = 0;
     display2.textContent = display2.textContent + " 0 =";
+    setAccumulated(0);
     return true;
   }
 

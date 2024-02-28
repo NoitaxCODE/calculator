@@ -33,10 +33,7 @@ export const formatDisplayNumber = (displayText, content) => {
 
   //DETECTO SI HAY UN .0
   let decimal0 = false
-  if ((arrayClear.join('') + content).includes('.0') ) decimal0 = true
-
-
-  console.log(displayText, content)
+  if ((arrayClear.join('') + content).includes('.0')) decimal0 = true
 
   // CONVIERTO EL ARRAY EN STRING, LE CONCATENO EL VALOR NUEVO, LO CONVIERTO A NUMERO Y LE DOY FORMATO DE NUMERO ESPAÑOL
   // CREO EL IF PARA RESOLVER EL PROBLEMA CON EL .0
@@ -44,12 +41,12 @@ export const formatDisplayNumber = (displayText, content) => {
   let result
   if (displayText.includes(',') && content === '0') {
     result = arrayClear.join('').replace('.', ',') + content
-  }else if( !decimal0){
+  } else if (!decimal0) {
     result = (parseFloat(arrayClear.join('') + content)).toLocaleString('es-ES', { maximumFractionDigits: 7 })
   } else {
     result = arrayClear.join('').replace('.', ',') + content
   }
-  
+
   // console.log(result)
 
   return result
@@ -84,7 +81,7 @@ export const showDisplay = (e) => {
   if (displayText.textContent.length >= 11) return
   const content = e.target.innerText
   displayText.textContent = formatDisplayNumber(displayText.textContent, content)
-  
+
 
 };
 
