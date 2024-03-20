@@ -25,7 +25,8 @@ const urlsToCache = [
   "./helpers/operations.js",
   "./helpers/validateOperations.js",
   "./media/img/calc-screenshot.png",
-  "./media/img/calc-screenshot-mobile.png"
+  "./media/img/calc-screenshot-mobile.png",
+  "./media/img/logofunny.svg"
 ];
 
 self.addEventListener("install", (e) => {
