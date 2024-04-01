@@ -33,6 +33,7 @@ const percent = document.querySelector("#percent");
 const sound = document.querySelector("#sound");
 const back = document.querySelector("#back");
 const audio = new Audio(await getAudioUrl());
+audio.volume = 0;
 
 document.addEventListener("keydown", ({ key }) => {
 
@@ -169,6 +170,4 @@ if ("serviceWorker" in navigator) {
     }
   })();
 }
-
-
 

@@ -4,18 +4,15 @@
 }
 
 body {
-  background-color: hsl(185deg 39% 62%);
+  background-color: #78bec4;
   display: grid;
   grid-template-areas: "leftside main main main main main main main main main rightside";
   height: 100vh;
   margin: 0;
-
-  /* place-items: start center; */
-
-  /* place-items: center; */
+  padding: .6rem;
 }
 
-#calculator {
+.calculator {
   background-color: rgb(33 187 136);
   border: 4px solid rgb(0 0 0);
   border-radius: 30px;
@@ -24,9 +21,10 @@ body {
   display: grid;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  gap: 1rem;
+  gap: .6rem;
   grid-area: main;
   grid-template-areas:
+    "NONE NONE LOGO LOGO"
     "DISPLAY DISPLAY DISPLAY DISPLAY"
     "CLEAR BACK PERCENT DIVIDE"
     "SEVEN EIGHT NINE MULTIPLY"
@@ -35,19 +33,15 @@ body {
     "COMA ZERO SOUND RESULT";
   margin: 16px 0;
   min-height: 620px;
-  min-width: 390px;
+  min-width: 350px;
   padding: 1.5rem 2px;
   place-items: center;
   position: relative;
 }
 
-#calculator::before {
-  color: white;
-  content: "CALCULATOR";
-  font-size: 28px;
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
+.logo{
+  grid-area: LOGO;
+  justify-self: end;
 }
 
 .item {
@@ -73,7 +67,7 @@ body {
   box-shadow: var(--shadow-inset-retro);
 }
 
-#display {
+.display {
   align-items: flex-start;
   background-color: black;
   border-radius: 9px;
@@ -83,14 +77,13 @@ body {
   grid-area: DISPLAY;
   height: 6rem;
   justify-content: center;
-  margin-top: 2rem;
   min-width: 290px;
   overflow: hidden;
   padding: 0 24px;
   width: 80%;
 }
 
-#display2 {
+.display2 {
   align-self: flex-end;
   color: white;
   font-size: 1.5em;
@@ -109,7 +102,7 @@ body {
   background-color: rgb(235 197 74);
 }
 
-#displayText {
+.displayText {
   align-self: flex-end;
   color: #fff;
   display: inline;
@@ -133,118 +126,87 @@ body {
   width: 80%;
 }
 
-.item:nth-child(1) {
+.item:nth-child(2) {
   background-color: red;
 }
 
-.item:nth-child(2) {
+.item:nth-child(3) {
   grid-area: CLEAR;
 }
 
-.item:nth-child(3) {
+.item:nth-child(4) {
   grid-area: BACK;
 }
 
-.item:nth-child(4) {
+.item:nth-child(5) {
   grid-area: PERCENT;
 }
 
-.item:nth-child(5) {
+.item:nth-child(6) {
   grid-area: DIVIDE;
 }
 
-.item:nth-child(6) {
+.item:nth-child(7) {
   grid-area: SEVEN;
 }
 
-.item:nth-child(7) {
+.item:nth-child(8) {
   grid-area: EIGHT;
 }
 
-.item:nth-child(8) {
+.item:nth-child(9) {
   grid-area: NINE;
 }
 
-.item:nth-child(9) {
+.item:nth-child(10) {
   grid-area: MULTIPLY;
 }
 
-.item:nth-child(10) {
+.item:nth-child(11) {
   grid-area: FOUR;
 }
 
-.item:nth-child(11) {
+.item:nth-child(12) {
   grid-area: FIVE;
 }
 
-.item:nth-child(12) {
+.item:nth-child(13) {
   grid-area: SIX;
 }
 
-.item:nth-child(13) {
+.item:nth-child(14) {
   grid-area: SUBTRACT;
 }
 
-.item:nth-child(14) {
+.item:nth-child(15) {
   grid-area: ONE;
 }
 
-.item:nth-child(15) {
+.item:nth-child(16) {
   grid-area: TWO;
 }
 
-.item:nth-child(16) {
+.item:nth-child(17) {
   grid-area: THREE;
 }
 
-.item:nth-child(17) {
+.item:nth-child(18) {
   grid-area: ADD;
 }
 
-.item:nth-child(18) {
+.item:nth-child(19) {
   grid-area: COMA;
 }
 
-.item:nth-child(19) {
+.item:nth-child(20) {
   grid-area: ZERO;
 }
 
-.item:nth-child(20) {
+.item:nth-child(21) {
   grid-area: SOUND;
 }
 
-.item:nth-child(21) {
+.item:nth-child(22) {
   background-color: rgb(250 69 69);
   grid-area: RESULT;
-}
-
-.leftside, .rightside{  
-  align-items: center;
-  display: none;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: space-around;
-}
-
-
-.leftside{
-  grid-area: leftside;
-}
-
-.rightside{
-  grid-area: rightside;
-}
-
-
-
-/* @media (width > 400px) {
-  #calculator{
-    min-width: 600px;
-  }
-} */
-
-@media (width > 600px) {
-  .leftside, .rightside{
-    display: flex;
-  }
 }

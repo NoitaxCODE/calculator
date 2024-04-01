@@ -1,4 +1,4 @@
-const CACHE_NAME = "v2.70_cache_calculator";
+const CACHE_NAME = "v2.702_cache_calculator";
 // CUIDADO DE NO ESCRIBIR BIEN A LAS RUTAS NI A LOS NOMBRES DE LOS ARCHIVOS PQ SINO NO TE CARGA EL CACHE
 const urlsToCache = [
   "./",
@@ -25,7 +25,8 @@ const urlsToCache = [
   "./helpers/operations.js",
   "./helpers/validateOperations.js",
   "./media/img/calc-screenshot.png",
-  "./media/img/calc-screenshot-mobile.png"
+  "./media/img/calc-screenshot-mobile.png",
+  "./media/img/logofunny.svg"
 ];
 
 self.addEventListener("install", (e) => {
