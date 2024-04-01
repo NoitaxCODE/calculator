@@ -1,6 +1,6 @@
 {
-  "name": "com.funnycalculator.myapp",
-  "short_name": "com.funnycalculator.myapp",
+  "name": "Funny Calculator",
+  "short_name": "Funny Calculator",
   "description": "Calculadora standart personalizable",
   "background_color": "#2B2B2B",
   "theme_color": "#F0DB4F",
