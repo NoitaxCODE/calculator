@@ -19,7 +19,7 @@ body {
   box-shadow: var(--shadow-retro);
   box-sizing: border-box;
   display: grid;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Courier Prime", monospace;
   font-weight: bold;
   gap: .6rem;
   grid-area: main;
