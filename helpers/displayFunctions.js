@@ -43,11 +43,11 @@ export const formatDisplayNumber = (displayText, content) => {
     result = arrayClear.join('').replace('.', ',') + content
   } else if (!decimal0) {
     result = (parseFloat(arrayClear.join('') + content)).toLocaleString('es-ES', { maximumFractionDigits: 7 })
+  } else if (content === 'backspace') {
+    result = arrayClear.join('').replace('.', ',')
   } else {
     result = arrayClear.join('').replace('.', ',') + content
   }
-
-  // console.log(result)
 
   return result
 
@@ -144,5 +144,5 @@ export const backButton = () => {
     displayText.textContent = 0;
     return;
   }
-  displayText.textContent = displayText.textContent.slice(0, -1);
+  displayText.textContent = formatDisplayNumber(displayText.textContent.slice(0, -1), 'backspace');
 };

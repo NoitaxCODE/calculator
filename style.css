@@ -42,6 +42,7 @@ body {
 .logo{
   grid-area: LOGO;
   justify-self: end;
+  padding-right: 13%;
 }
 
 .item {
