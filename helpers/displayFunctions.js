@@ -49,8 +49,6 @@ export const formatDisplayNumber = (displayText, content) => {
     result = arrayClear.join('').replace('.', ',') + content
   }
 
-  // console.log(result)
-
   return result
 
 };

@@ -1,4 +1,4 @@
-const CACHE_NAME = "v2.6_cache_calculator";
+const CACHE_NAME = "v2.7_cache_calculator";
 // CUIDADO DE NO ESCRIBIR BIEN A LAS RUTAS NI A LOS NOMBRES DE LOS ARCHIVOS PQ SINO NO TE CARGA EL CACHE
 const urlsToCache = [
   "./",
